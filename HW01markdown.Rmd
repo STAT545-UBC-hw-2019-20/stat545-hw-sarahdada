@@ -26,4 +26,11 @@ names(mtcars)
 ```
 #When I use names, I can see the many variables of information available about mtcars. 
 ```
-#
+```{r}
+head(mtcars)
+```
+#We can also see that the top cars on the list available with these variables, including Mazda RX4, and Datsun710.
+```{r}
+tail(mtcars)
+```
+#Finally, we see that there is infomation about cars at the end of the list, including Porche 914-2, Lotus Europa, and Ford Pantera.
