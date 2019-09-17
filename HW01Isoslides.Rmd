@@ -1,0 +1,22 @@
+---
+title: "Hw01markdown"
+output: ioslides_presentation
+author: "Sarah Dada""
+date: "September 19 2019"
+---
+## A little about Mtcars. Summary includes:
+-speed
+-distance
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+---
+## Names includes the information about:
+-miles per gallon
+-cylinder
+-other
+```{r}
+names(mtcars)
+```
+
