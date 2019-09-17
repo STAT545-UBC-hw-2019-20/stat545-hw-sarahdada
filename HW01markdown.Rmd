@@ -15,7 +15,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-I'm going to summarize a little bit about mtcars for you. Mtcars has data that was exctracted from the 1974 Motor trend US magazine (citation:R documentation). Mtcars has speed and distance. It shows a min, max, median, mean, and the 1st and 3rd quarter's speed and distance.
+I'm going to explain a little bit about mtcars for you. Mtcars has data that was extracted from the 1974 Motor trend US magazine (citation:R documentation). Mtcars has speed and distance. It shows a min, max, median, mean, and the 1st and 3rd quarter's speed and distance.
 
 ```{r cars}
 summary(cars)
@@ -25,7 +25,7 @@ summary(cars)
 names(mtcars)
 ```
 When I use names, I can see the many variables of information available about mtcars. 
-```
+
 ```{r}
 head(mtcars)
 ```
