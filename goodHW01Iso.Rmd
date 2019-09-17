@@ -1,13 +1,15 @@
 ---
-title: "Hw01markdown"
+title: "GoodHW01Iso"
 output: ioslides_presentation
-author: "Sarah Dada""
-date: "September 19 2019"
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
 ## A little about Mtcars. Summary includes:
 -speed
 -distance
-
 ```{r cars, echo = TRUE}
 summary(cars)
 ```
