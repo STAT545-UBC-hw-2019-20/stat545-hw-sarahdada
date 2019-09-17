@@ -1,0 +1,29 @@
+---
+title: "Hw01markdown"
+author: "Sarah Dada"
+date: "September 19 2019"
+output:
+    html_document:
+    keep_md: true
+    theme: cerulean
+    toc: true
+    toc_float: true
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#I'm going to summarize a little bit about mtcars for you. Mt cars has speed and distance. It shows a min, max, median, mean, and the 1st and 3rd quarter's speed and distance.
+
+```{r cars}
+summary(cars)
+```
+
+```{r}
+names(mtcars)
+```
+#When I use names, I can see the many variables of information available about mtcars. 
+```
+#
