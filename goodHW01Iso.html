@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>GoodHW01Iso</title>
+  <title>MTcars at a glance</title>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -19,7 +19,7 @@
     var SLIDE_CONFIG = {
       // Slide settings
       settings: {
-                title: 'GoodHW01Iso',
+                title: 'MTcars at a glance',
                         useBuilds: true,
         usePrettify: true,
         enableSlideAreas: true,
@@ -97,7 +97,7 @@ slide:not(.current) .plotly.html-widget{
 
 <slide class=""><hgroup><h2>A little about Mtcars. Summary includes:</h2></hgroup><article  id="a-little-about-mtcars.-summary-includes">
 
-<p>-speed -distance</p>
+<p>speed and distance</p>
 
 <pre class = 'prettyprint lang-r'>summary(cars)</pre>
 
@@ -109,14 +109,31 @@ slide:not(.current) .plotly.html-widget{
 ##  3rd Qu.:19.0   3rd Qu.: 56.00  
 ##  Max.   :25.0   Max.   :120.00</pre>
 
+</article></slide><slide class=""><hgroup><h2>We can see what types of cars were surveyed</h2></hgroup><article  id="we-can-see-what-types-of-cars-were-surveyed">
+
+<p>We can also see that the top cars on the list available with these variables, including Mazda RX4, and Datsun710.</p>
+
+<pre >##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</pre>
+
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
 
-</article></slide><slide class=""><hgroup><h2>Names includes the information about:</h2></hgroup><article  id="names-includes-the-information-about">
+</article></slide><slide class=""><hgroup><h2>We can seperate the list and just see the bottom as well</h2></hgroup><article  id="we-can-seperate-the-list-and-just-see-the-bottom-as-well">
 
-<p>-miles per gallon -cylinder -other</p>
+<p>There is infomation about cars at the end of the list, including Porche 914-2, Lotus Europa, and Ford Pantera.</p>
 
-<pre >##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;
-## [11] &quot;carb&quot;</pre></article></slide>
+<pre >##                 mpg cyl  disp  hp drat    wt qsec vs am gear carb
+## Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.7  0  1    5    2
+## Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.9  1  1    5    2
+## Ford Pantera L 15.8   8 351.0 264 4.22 3.170 14.5  0  1    5    4
+## Ferrari Dino   19.7   6 145.0 175 3.62 2.770 15.5  0  1    5    6
+## Maserati Bora  15.0   8 301.0 335 3.54 3.570 14.6  0  1    5    8
+## Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.6  1  1    4    2</pre></article></slide>
 
 
   <slide class="backdrop"></slide>
