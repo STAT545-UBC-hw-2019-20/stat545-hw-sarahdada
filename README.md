@@ -9,7 +9,8 @@ I swear, I still enjoy vaccines.
 **Honestly.**
 
 *Finally*, I would like you to know that I am representing the east coast.
-### I'm from Prince Edward Island
+### I'm from Prince Edward Island.
+We are known for our potatoes and lobsters, and the play **Anne of Green Gables**
 
 
 
