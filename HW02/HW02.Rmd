@@ -10,28 +10,9 @@ knitr::opts_chunk$set(echo = TRUE)
 library(gapminder)
 library(tidyverse)
 ```
-
+I filtered so that if there was information in Afghanistan, Vietnam, or Cambodia, within the years 1970 and 1979, that information would be filtered into the dataframe named 'gapminder1.1'.
 ```{r}
-gapminder %>%
-  filter(country == "Cambodia","vietnam") %>%
-  select(1970)
-
-if (gapminder)
-  if (require("dplyr")) {
-gapminder %>%
-  filter(year == 2007) %>%
-  group_by(continent)
-    
-if (gapminder %>%
-  filter(country == "Cambodia") %>%
-  select(year))
-  
-filtered <- gapminder %>%
-  filter(year == '1970', continent == 'Asia')
-
 gapminder1.1 <- gapminder %>% 
   dplyr::filter(country == 'Afghanistan'| country =='Vietnam' | country == 'Cambodia' && year == 1970:1979)
-
-gapminder1.1
 ```
 
