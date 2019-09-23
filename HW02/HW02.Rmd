@@ -35,7 +35,11 @@ gapminderdecrease <- gapminder %>%
   mutate (yearlychangelifeExp = lifeExp-laglifeExp) %>%
   filter(yearlychangelifeExp <0) 
 
-increaselifeExp <- gapminder != gapminderdecrease 
+increaselifeExp <- gapminder %>%
+  arrange(country,year) %>%
+  mutate(laglifeExp = lag(lifeExp,1)) %>%
+  mutate (yearlychangelifeExp = lifeExp-laglifeExp) %>%
+  filter(yearlychangelifeExp >0) 
   
 ```
 use mutate to add another column that has the data that I want, which is basically the life expectance column minus the life expectancy of one year before. 
@@ -43,3 +47,21 @@ lag life expect gives you the previous year's life expectancy
 hopefully this doesnt overlap with the next country
 
 new variable that is the increase in life expectance
+
+top, decrease life expectancy
+omcrease lofe expectance (i think that's what they asked for, new variable?)
+
+```{r}
+
+percapmax <- gapminder %>% 
+        group_by(country) %>% 
+        filter(max == max(gdpPercap))%>% 
+        arrange(country,gdpPercap)
+
+
+filter or summarize( ????)
+why wont most the first max after filter( max==max(gdpPercap)) work? what should it be named?
+
+             
+```
+this is giving me the highest gdp, but i want the highest gdp PER COUNTRY
