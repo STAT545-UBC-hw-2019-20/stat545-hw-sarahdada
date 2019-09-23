@@ -10,9 +10,36 @@ knitr::opts_chunk$set(echo = TRUE)
 library(gapminder)
 library(tidyverse)
 ```
-I filtered so that if there was information in Afghanistan, Vietnam, or Cambodia, within the years 1970 and 1979, that information would be filtered into the dataframe named 'gapminder1.1'.
+I filtered so that if there was information in Afghanistan, Vietnam, or Cambodia, within the years 1970 and 1979, that information would be filtered into the dataframe named 'gapminder1.1'. I have something loaded that interferes with dplyr, so I have to specify that I am using that. Or is this going && at the end-should i filter for 1970:1979 first? then I would add 
+
+gapminder %>% filter (year == 1970:1979) and then add
+gapminder1.1 <- gapminder %>% 
+  dplyr::filter(country == 'Afghanistan'| country =='Vietnam' | country == 'Cambodia', year == 1970:1979)
 ```{r}
 gapminder1.1 <- gapminder %>% 
   dplyr::filter(country == 'Afghanistan'| country =='Vietnam' | country == 'Cambodia' && year == 1970:1979)
 ```
+I'm trying to include variables 'country' and gdpPercapita in my filtered version.
+```{r}
+gapminder1.1 %>%
+  dplyr::select(country,gdpPercap)
+```
+```{r}
+gapminder %>%
+  dplyr::select(lifeExp)
+```
+```{r}
+gapminderdecrease <- gapminder %>%
+  arrange(country,year) %>%
+  mutate(laglifeExp = lag(lifeExp,1)) %>%
+  mutate (yearlychangelifeExp = lifeExp-laglifeExp) %>%
+  filter(yearlychangelifeExp <0) 
 
+increaselifeExp <- gapminder != gapminderdecrease 
+  
+```
+use mutate to add another column that has the data that I want, which is basically the life expectance column minus the life expectancy of one year before. 
+lag life expect gives you the previous year's life expectancy
+hopefully this doesnt overlap with the next country
+
+new variable that is the increase in life expectance
