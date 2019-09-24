@@ -59,9 +59,16 @@ percapmax <- gapminder %>%
         arrange(country,gdpPercap)
 
 
+why wont above work?
 filter or summarize( ????)
 why wont most the first max after filter( max==max(gdpPercap)) work? what should it be named?
 
+  percapmax <- gapminder %>%  
+  group_by(country) %>% 
+       summarise(max(==max(gdpPercap)))
+
+
+other way that works-(1)
              
 ```
 this is giving me the highest gdp, but i want the highest gdp PER COUNTRY
