@@ -39,9 +39,13 @@ increaselifeExp <- gapminder %>%
   arrange(country,year) %>%
   mutate(laglifeExp = lag(lifeExp,1)) %>%
   mutate (yearlychangelifeExp = lifeExp-laglifeExp) %>%
-  filter(yearlychangelifeExp >0) 
+  filter(yearlychangelifeExp >0)
+
+make a new variable that is postitive?, filter that is negative?. dont know what they want different
   
 ```
+filter to decrease, and then add a column saying increase in it?
+
 use mutate to add another column that has the data that I want, which is basically the life expectance column minus the life expectancy of one year before. 
 lag life expect gives you the previous year's life expectancy
 hopefully this doesnt overlap with the next country
@@ -65,9 +69,10 @@ why wont most the first max after filter( max==max(gdpPercap)) work? what should
 
   percapmax <- gapminder %>%  
   group_by(country) %>% 
-       summarise(max(==max(gdpPercap)))
+       summarise(max=max(gdpPercap))
 
-
+summaraise vs mutate
+reload tidyverse
 other way that works-(1)
              
 ```
