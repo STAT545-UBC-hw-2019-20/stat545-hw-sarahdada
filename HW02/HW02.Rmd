@@ -85,6 +85,11 @@ Continentcount<-(gapminder %>%
 
 Continentcount %>% mutate(mean=mean(n))
 
+#The interquartile range appears to be 30, which means that the difference between the 25th and 75th quartiles is 30.
+Continentcount %>% 
+  dplyr::filter(n > quantile(n, 0.25), 
+                n < quantile(n, 0.75))
+
 Continentcount %>% 
   ggplot(aes(x = continent, y = n))+
     geom_bar(stat = "identity") +
