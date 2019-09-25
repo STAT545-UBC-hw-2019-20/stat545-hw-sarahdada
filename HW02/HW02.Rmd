@@ -75,10 +75,15 @@ A categorical value
 (gapminder %>%
   distinct(continent))
 
-#then i found out how many countries there are in each continent. This always seems to work when you run it the second time
+#then i found out how many countries there are in each continent. 
 Continentcount<-(gapminder %>% 
   filter(year==2007) %>%
   count(continent)) 
+
+
+#This shows us that the distribution is between 2 and 52, with Africa having the highest number of countrie (52), and Oceania having the lowest number of countries (2). The median value is 33 countries, which is found in Asia. 
+
+Continentcount %>% mutate(mean=mean(n))
 
 Continentcount %>% 
   ggplot(aes(x = continent, y = n))+
@@ -90,6 +95,14 @@ Continentcount %>%
 
 
 ```
+What values are typical? What's the spread? What is the distribution? 
+The typical values are. The distribution is between 1 and 55, with
+
+```{r}
+
+```
+
+
 how many countries, which has the most countries, which has the least countries, which has the median, then bar graph this
 geom_
 gapminder %>%
@@ -101,3 +114,13 @@ Continentcount %>%
     labs(x = "Continent",y = "Number of Countries")
       title = "Life Expectancy vs GDP Per Capita in Canada"
       subtitle = "(based upon data from gapminder in 2007)
+```{r}
+gapminder %>% 
+  filter(year==2007) %>%
+  count(continent)
+```
+```{r}
+Continentcount %>% summarise(meancountries=mean(Continentcount, na.rm = TRUE))
+```
+      
+      
