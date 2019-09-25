@@ -128,19 +128,21 @@ gapminder %>%
 
 Assignment3
 
-
-
-gapminder%>%
-boxplot(pop~cyl, data=mtcars, notch=TRUE,
+boxplot(mpg~cyl, data=mtcars, notch=TRUE,
   col=(c("gold","darkgreen")),
-  main="Tooth Growth", xlab="Suppliment and Dose
+  main="Car MPG vs Cylinders", xlab="Miles per gallon", ylab="cylinders")
 
       
-gapminder %>% 
+dataminder %>% 
   ggplot(aes(x = pop, y = gdpPercap)) + 
   geom_point(color = "blue")+labs(x="population",y="gdp per capita")
       title = "Population vs GDP"+
       subtitle = "taken from year 2007 Gapminder data"
+
+mtcars %>% 
+  ggplot(aes(x = cyl, y = hp)) + 
+  geom_point(color = "blue")+labs(x="cylinders",y="horsepower")
+  title = "Cylinders vs horsepower"
 
 
 
