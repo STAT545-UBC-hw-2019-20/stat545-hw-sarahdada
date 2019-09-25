@@ -2,7 +2,7 @@
 title: "HW02"
 output: html_document
 ---
-#should we be doing all the assignments on R markdown
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
