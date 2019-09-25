@@ -56,33 +56,39 @@ top, decrease life expectancy
 omcrease lofe expectance (i think that's what they asked for, new variable?)
 
 ```{r}
+percapmax <- gapminder %>%  
+group_by(country) %>% 
+      summarise(max=max(gdpPercap))
 
-percapmax <- gapminder %>% 
-        group_by(country) %>% 
-        filter(max == max(gdpPercap))%>% 
-        arrange(country,gdpPercap)
-
-
-why wont above work?
-filter or summarize( ????)
-why wont most the first max after filter( max==max(gdpPercap)) work? what should it be named?
-
-  percapmax <- gapminder %>%  
-  group_by(country) %>% 
-       summarise(max=max(gdpPercap))
-
-summaraise vs mutate
-reload tidyverse
-other way that works-(1)
-             
+print(percapmax)
 ```
 this is giving me the highest gdp, but i want the highest gdp PER COUNTRY
 
 Assignment 2
 
-A qualitative and a quantitative value have to be found for 
+A qualitative and a quantitative value have to be found within gapminder.
+
+A categorical value
 
 ```{r}
+#i used distinct to determine which continents there were in gapminder
+(gapminder %>%
+  distinct(continent))
+
+#then i found out how many countries there are in each continent
+Continentcount<-(gapminder %>% 
+  filter(year==2007) %>%
+  count(continent)) 
+
+Continentcount %>% 
+  ggplot(aes(x = continent, y = n))+
+    geom_bar(stat = "identity") +
+    labs(x = "Continent",y = "Number of Countries")
+      title = "Life Expectancy vs GDP Per Capita in Canada"
+      subtitle = "(based upon data from gapminder in 2007)
 
 ```
-
+how many countries, which has the most countries, which has the least countries, which has the median, then bar graph this
+geom_
+gapminder %>%
+mutate(numberofcountries=count(country))
