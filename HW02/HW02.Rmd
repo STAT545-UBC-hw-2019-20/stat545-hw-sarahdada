@@ -103,8 +103,8 @@ Continentcount %>%
 ```
 Assignment 2: Quantitative 
 
+I determined the population vs gdp per capita of the gapminder data, using the ggplot geompoint. The highes amount of population had very little GDP per capita; a very small amount of the population had a high gdp per capita.
 
-I determined the population vs gdp per capita of the gapminder data, using the ggplot geompoint. 
 
 ```{r}
 gapminder %>% 
