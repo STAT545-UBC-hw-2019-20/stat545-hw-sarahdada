@@ -75,7 +75,7 @@ A categorical value
 (gapminder %>%
   distinct(continent))
 
-#then i found out how many countries there are in each continent
+#then i found out how many countries there are in each continent. This always seems to work when you run it the second time
 Continentcount<-(gapminder %>% 
   filter(year==2007) %>%
   count(continent)) 
@@ -84,11 +84,20 @@ Continentcount %>%
   ggplot(aes(x = continent, y = n))+
     geom_bar(stat = "identity") +
     labs(x = "Continent",y = "Number of Countries")
-      title = "Life Expectancy vs GDP Per Capita in Canada"
-      subtitle = "(based upon data from gapminder in 2007)
+      title = "Number of countries in each Continent"
+      subtitle = "(based on 2007 gapminder data)
+
+
 
 ```
 how many countries, which has the most countries, which has the least countries, which has the median, then bar graph this
 geom_
 gapminder %>%
 mutate(numberofcountries=count(country))
+
+Continentcount %>% 
+  ggplot(aes(x = continent, y = n))+
+    geom_bar(stat = "identity") +
+    labs(x = "Continent",y = "Number of Countries")
+      title = "Life Expectancy vs GDP Per Capita in Canada"
+      subtitle = "(based upon data from gapminder in 2007)
