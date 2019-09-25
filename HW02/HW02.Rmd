@@ -10,24 +10,27 @@ knitr::opts_chunk$set(echo = TRUE)
 library(gapminder)
 library(tidyverse)
 ```
-I filtered so that if there was information in Afghanistan, Vietnam, or Cambodia, within the years 1970 and 1979, that information would be filtered into the dataframe named 'gapminder1.1'. I have something loaded that interferes with dplyr, so I have to specify that I am using that. Or is this going && at the end-should i filter for 1970:1979 first? then I would add 
+Assignment 1.1 and 1.2
 
-gapminder %>% filter (year == 1970:1979) and then add
-gapminder1.1 <- gapminder %>% 
-  dplyr::filter(country == 'Afghanistan'| country =='Vietnam' | country == 'Cambodia', year == 1970:1979)
+I filtered for data between years 1970 and 1979, including those years.
+```{r}
+gapminder %>% filter (year == 1970:1979)
+```
+
+I filtered so that if there was information in Afghanistan, Vietnam, or Cambodia, within the years 1970 and 1979, that information would be filtered into the dataframe named 'gapminder1.1'. I have something loaded that interferes with dplyr, so I have to specify that I am using dplyr. 
+ 
 ```{r}
 gapminder1.1 <- gapminder %>% 
   dplyr::filter(country == 'Afghanistan'| country =='Vietnam' | country == 'Cambodia' && year == 1970:1979)
 ```
-I'm trying to include variables 'country' and gdpPercapita in my filtered version.
+I included the variables 'country' and gdpPercapita in my filtered version.
 ```{r}
 gapminder1.1 %>%
   dplyr::select(country,gdpPercap)
 ```
-```{r}
-gapminder %>%
-  dplyr::select(lifeExp)
+Assignment 1.3
 ```
+I created a variable which had the life expectancy of the year before, called laglifeExp, then I took this away from the life expectancy. This created the yearly change in life expectance, and then I filtered out the positive change so I was only left with the decrease in population. It also said make a variable that is positive in the instructions, but I didn't know why they wanted that, so underneath is the code for increased life expectancy, which shows a filter for any lag that is greater than 0 (so it would be an increase in life expectance over the year).
 ```{r}
 gapminderdecrease <- gapminder %>%
   arrange(country,year) %>%
@@ -40,68 +43,52 @@ increaselifeExp <- gapminder %>%
   mutate(laglifeExp = lag(lifeExp,1)) %>%
   mutate (yearlychangelifeExp = lifeExp-laglifeExp) %>%
   filter(yearlychangelifeExp >0)
-
-make a new variable that is postitive?, filter that is negative?. dont know what they want different
-  
 ```
-filter to decrease, and then add a column saying increase in it?
 
-use mutate to add another column that has the data that I want, which is basically the life expectance column minus the life expectancy of one year before. 
-lag life expect gives you the previous year's life expectancy
-hopefully this doesnt overlap with the next country
+Assignment 1.4
 
-new variable that is the increase in life expectance
-
-top, decrease life expectancy
-omcrease lofe expectance (i think that's what they asked for, new variable?)
-
+I use group_by because I want the highest GDP per country, not just in general.
 ```{r}
 percapmax <- gapminder %>%  
 group_by(country) %>% 
       summarise(max=max(gdpPercap))
-
-print(percapmax)
 ```
-this is giving me the highest gdp, but i want the highest gdp PER COUNTRY
 
 Assignment 1.5
+Filtered for country named Canada, made the information available as life expectancy and gdp per capita within canada, and then plotted them against each other.
+
 ```{r}
-Continentcount %>% 
-  ggplot(aes(x = continent, y = n))+
-    geom_bar(stat = "identity") +
-    labs(x = "Continent",y = "Number of Countries")
-      title = "Number of countries in each Continent"
-      subtitle = "(based on 2007 gapminder data)
+gapminder%>% 
+    filter(country=="Canada")%>% 
+    select(lifeExp,gdpPercap)%>% 
+  ggplot(aes(x = lifeExp, y = gdpPercap)) + 
+  geom_point(color = "blue")+
+    labs(
+      x="lifeExp",
+      y="gdPercap",
+      title = "Canada's Life Expectancy vs GDP Per Capita",
+      subtitle = "based upon data from gapminder in 2007"
+      )
 ```
 
 
 Assignment 2
-
-A qualitative and a quantitative value have to be found within gapminder.
-
-A categorical value
-
+Qualitative:
+First I used i used distinct to determine which continents there were in gapminder, then I needed to filter for how many countries were there in each continent in 2007. This shows us that the distribution is between 2 and 52, with Africa having the highest number of countrie (52), and Oceania having the lowest number of countries (2). The median value is 33 countries, which is found in Asia. I used mutate to find the mean,which ended up being 28.4. The interquartile range appears to be 30, which means that the difference between the 25th and 75th quartiles is 30. You can also see the spread of continents. I have shown a bar chart of the data from Continent count.
 ```{r}
-#i used distinct to determine which continents there were in gapminder
 (gapminder %>%
   distinct(continent))
-
-#then I found out how many countries there are in each continent. 
+ 
 Continentcount<-(gapminder %>% 
   filter(year==2007) %>%
   count(continent)) 
 
-
-#This shows us that the distribution is between 2 and 52, with Africa having the highest number of countrie (52), and Oceania having the lowest number of countries (2). The median value is 33 countries, which is found in Asia. 
-
 Continentcount %>% mutate(mean=mean(n))
 
-#The interquartile range appears to be 30, which means that the difference between the 25th and 75th quartiles is 30.
 Continentcount %>% 
   dplyr::filter(n > quantile(n, 0.25), 
                 n < quantile(n, 0.75))
 
-#You can also see the spread of continents.
 Continentcount %>% spread(continent,n)
 
 
@@ -112,69 +99,43 @@ Continentcount %>%
       title = "Number of countries in each Continent"
       subtitle = "(based on 2007 gapminder data)
 
-#this shows a bar chart of the data from Continent count.
+
+```
+Assignment 2: Quantitative 
 
 
-Quantitative, do spread and standard deviation.
+I determined the population vs gdp per capita of the gapminder data, using the ggplot geompoint. 
 
+```{r}
 gapminder %>% 
   ggplot(aes(x = pop, y = gdpPercap)) + 
-  geom_point(color = "blue")+labs(x="population",y="gdp per capita")
-      title = "Population vs GDP"+
+  geom_point(color = "blue")+
+    labs(
+      x="population",
+      y="gdp per capita",
+      title = "Population vs GDP",
       subtitle = "taken from year 2007 Gapminder data"
+      )
+```
 
 
-
+```
 
 Assignment3
 
+I made a boxplot based on data from mtcars, showing the miles per gallon vs cylinder data. I also made a point graph, showing horsepower vs cylinders.
+```{r}
 boxplot(mpg~cyl, data=mtcars, notch=TRUE,
   col=(c("gold","darkgreen")),
   main="Car MPG vs Cylinders", xlab="Miles per gallon", ylab="cylinders")
 
-      
-dataminder %>% 
-  ggplot(aes(x = pop, y = gdpPercap)) + 
-  geom_point(color = "blue")+labs(x="population",y="gdp per capita")
-      title = "Population vs GDP"+
-      subtitle = "taken from year 2007 Gapminder data"
 
 mtcars %>% 
   ggplot(aes(x = cyl, y = hp)) + 
-  geom_point(color = "blue")+labs(x="cylinders",y="horsepower")
-  title = "Cylinders vs horsepower"
-
-
-
-
-
-```
-What values are typical? What's the spread? What is the distribution? 
-The typical values are. The distribution is between 1 and  with
-
-```{r}
+  geom_point(color = "blue")+labs(x="cylinders",
+  y="horsepower",
+  title = "Cylinders vs horsepower",
+  subtitle= "Information from mtcars"
+  )
 
 ```
-
-
-how many countries, which has the most countries, which has the least countries, which has the median, then bar graph this
-geom_
-gapminder %>%
-mutate(numberofcountries=count(country))
-
-Continentcount %>% 
-  ggplot(aes(x = continent, y = n))+
-    geom_bar(stat = "identity") +
-    labs(x = "Continent",y = "Number of Countries")
-      title = "Life Expectancy vs GDP Per Capita in Canada"
-      subtitle = "(based upon data from gapminder in 2007)
-```{r}
-gapminder %>% 
-  filter(year==2007) %>%
-  count(continent)
-```
-```{r}
-Continentcount %>% summarise(meancountries=mean(Continentcount, na.rm = TRUE))
-```
-      
-      
