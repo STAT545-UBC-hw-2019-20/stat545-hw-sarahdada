@@ -75,7 +75,7 @@ A categorical value
 (gapminder %>%
   distinct(continent))
 
-#then i found out how many countries there are in each continent. 
+#then I found out how many countries there are in each continent. 
 Continentcount<-(gapminder %>% 
   filter(year==2007) %>%
   count(continent)) 
@@ -90,12 +90,23 @@ Continentcount %>%
   dplyr::filter(n > quantile(n, 0.25), 
                 n < quantile(n, 0.75))
 
+#You can also see the spread of continents.
+Continentcount %>% spread(continent,n)
+
+
 Continentcount %>% 
   ggplot(aes(x = continent, y = n))+
     geom_bar(stat = "identity") +
     labs(x = "Continent",y = "Number of Countries")
       title = "Number of countries in each Continent"
       subtitle = "(based on 2007 gapminder data)
+
+#this shows a bar chart of the data from Continent count.
+
+
+Quantitative, do spread and standard deviation.
+
+
 
 
 
