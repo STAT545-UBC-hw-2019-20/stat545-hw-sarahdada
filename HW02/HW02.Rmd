@@ -64,6 +64,17 @@ print(percapmax)
 ```
 this is giving me the highest gdp, but i want the highest gdp PER COUNTRY
 
+Assignment 1.5
+```{r}
+Continentcount %>% 
+  ggplot(aes(x = continent, y = n))+
+    geom_bar(stat = "identity") +
+    labs(x = "Continent",y = "Number of Countries")
+      title = "Number of countries in each Continent"
+      subtitle = "(based on 2007 gapminder data)
+```
+
+
 Assignment 2
 
 A qualitative and a quantitative value have to be found within gapminder.
@@ -106,13 +117,38 @@ Continentcount %>%
 
 Quantitative, do spread and standard deviation.
 
+gapminder %>% 
+  ggplot(aes(x = pop, y = gdpPercap)) + 
+  geom_point(color = "blue")+labs(x="population",y="gdp per capita")
+      title = "Population vs GDP"+
+      subtitle = "taken from year 2007 Gapminder data"
+
+
+
+
+Assignment3
+
+
+
+gapminder%>%
+boxplot(pop~cyl, data=mtcars, notch=TRUE,
+  col=(c("gold","darkgreen")),
+  main="Tooth Growth", xlab="Suppliment and Dose
+
+      
+gapminder %>% 
+  ggplot(aes(x = pop, y = gdpPercap)) + 
+  geom_point(color = "blue")+labs(x="population",y="gdp per capita")
+      title = "Population vs GDP"+
+      subtitle = "taken from year 2007 Gapminder data"
+
 
 
 
 
 ```
 What values are typical? What's the spread? What is the distribution? 
-The typical values are. The distribution is between 1 and 55, with
+The typical values are. The distribution is between 1 and  with
 
 ```{r}
 
