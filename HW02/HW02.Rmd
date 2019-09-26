@@ -6,6 +6,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
 ```{r}
 library(gapminder)
 library(tidyverse)
@@ -29,7 +30,7 @@ gapminder1.1 %>%
   dplyr::select(country,gdpPercap)
 ```
 Assignment 1.3
-```
+
 I created a variable which had the life expectancy of the year before, called laglifeExp, then I took this away from the life expectancy. This created the yearly change in life expectance, and then I filtered out the positive change so I was only left with the decrease in population. It also said make a variable that is positive in the instructions, but I didn't know why they wanted that, so underneath is the code for increased life expectancy, which shows a filter for any lag that is greater than 0 (so it would be an increase in life expectance over the year).
 ```{r}
 gapminderdecrease <- gapminder %>%
@@ -75,6 +76,7 @@ gapminder%>%
 Assignment 2
 Qualitative:
 First I used i used distinct to determine which continents there were in gapminder, then I needed to filter for how many countries were there in each continent in 2007. This shows us that the distribution is between 2 and 52, with Africa having the highest number of countrie (52), and Oceania having the lowest number of countries (2). The median value is 33 countries, which is found in Asia. I used mutate to find the mean,which ended up being 28.4. The interquartile range appears to be 30, which means that the difference between the 25th and 75th quartiles is 30. You can also see the spread of continents. I have shown a bar chart of the data from Continent count.
+
 ```{r}
 (gapminder %>%
   distinct(continent))
@@ -101,6 +103,7 @@ Continentcount %>%
 
 
 ```
+
 Assignment 2: Quantitative 
 
 I determined the population vs gdp per capita of the gapminder data, using the ggplot geompoint. The highes amount of population had very little GDP per capita; a very small amount of the population had a high gdp per capita.
@@ -119,7 +122,6 @@ gapminder %>%
 ```
 
 
-```
 
 Assignment3
 
