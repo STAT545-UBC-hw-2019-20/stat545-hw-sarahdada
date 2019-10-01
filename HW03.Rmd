@@ -25,16 +25,65 @@ library(ggridges)
 library(scales)
 ```
 ```{r}
-gapminderdecrease <- gapminder %>%
+gapminderdecrease <- 
+  gapminder %>%
+  group_by(continent,lifeExp)%>%
   arrange(country,year) %>%
   mutate(laglifeExp = lag(lifeExp,1)) %>%
   mutate (yearlychangelifeExp = lifeExp-laglifeExp) %>%
   filter(yearlychangelifeExp <0) 
 
-increaselifeExp <- gapminder %>%
-  arrange(country,year) %>%
-  mutate(laglifeExp = lag(lifeExp,1)) %>%
-  mutate (yearlychangelifeExp = lifeExp-laglifeExp) %>%
-  filter(yearlychangelifeExp >0)
+#Object number two
+ gapminder %>% 
+  group_by(continent,year) %>% 
+  summarise(min_GDP = min(gdpPercap),
+    country=country[gdpPercap==min_GDP]) %>%
+     arrange(min_GDP)%>%
+   mutate(min_GDP)
+    
+      
+ 
+ 
+ 
+ 
+ (gapminder %>%
+  distinct(continent))
+ 
+Continentcount<-(gapminder %>% 
+  filter(year==2007) %>%
+  count(continent)) 
+
+Continentcount %>% mutate(mean=mean(n))
+
+Continentcount %>% 
+  dplyr::filter(n > quantile(n, 0.25), 
+                n < quantile(n, 0.75))
+
+Continentcount %>% spread(continent,n)
+
+
+Continentcount %>% 
+  ggplot(aes(x = continent, y = n))+
+    geom_bar(stat = "identity") +
+    labs(x = "Continent",y = "Number of Countries")
+      title = "Number of countries in each Continent"
+      subtitle = "(based on 2007 gapminder data)
+```
+I basically need to do lag, lower life expectancy over year
+```{r}
+#Object number two
+ gapminder %>% 
+  group_by (continent) %>% 
+  summarise(min_GDP=min(gdpPercap),min_country=min_country[gdpPercap==min_GDP],min_year=min_year[gdpPercap==min_GDP],
+  summarise(max_GDP=max(gdpPercap), max_country=max_country[gdpPercap==min_GDP],min_year=min_year[gdpPercap==min_GDP]) %>%
+  arrange(min_GDP,max_GDP)
+
+```
+```{r}
+ gapminder %>% 
+  group_by (continent) %>% 
+  summarise(min_GDP=min(gdpPercap),min_country=min_country[gdpPercap==min_GDP],min_year=min_year[gdpPercap==min_GDP],
+  summarise(max_GDP=max(gdpPercap), max_country=max_country[gdpPercap==min_GDP],min_year=min_year[gdpPercap==min_GDP]) %>%
+  arrange(min_GDP,max_GDP)
 ```
 
