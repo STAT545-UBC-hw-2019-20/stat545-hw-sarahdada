@@ -72,15 +72,16 @@ Continentcount %>%
 I basically need to do lag, lower life expectancy over year
 ```{r}
 #Object number two
- gapminder %>% 
+gap_min_max<-gapminder %>% 
   group_by (continent) %>% 
   summarise(min_GDP=min(gdpPercap),min_country=min_country[gdpPercap==min_GDP],min_year=min_year[gdpPercap==min_GDP],
   summarise(max_GDP=max(gdpPercap), max_country=max_country[gdpPercap==min_GDP],min_year=min_year[gdpPercap==min_GDP]) %>%
   arrange(min_GDP,max_GDP) %>%
-  mutate(in)  
-    
   mutate(range=round((range=max_GDP-min_GDP))
-
+         
+```
+```{r}
+print(gap_min_max)
 ```
 
 
