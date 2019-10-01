@@ -12,21 +12,87 @@ library(gapminder)
 library(ggridges)
 library(scales)
 ```
-This is task two, where I get the maximum and minimum GDP per capita. The (dialogue+plot)
+This is task two, where I get the maximum and minimum GDP per capita for all continents. The (dialogue+plot)
+I wanna do two, three, and five. try with this one, bar, and next one line.
 ```{r}
 gapminder %>% 
   group_by(continent) %>% 
   summarise(MinGDP=min(gdpPercap),Mincountry=country[gdpPercap==MinGDP],Minyear=year[gdpPercap==MinGDP],MaxGDP=max(gdpPercap),Maxcountry=country[gdpPercap==MaxGDP],Maxyear=year[gdpPercap==MaxGDP])%>% 
   mutate(Range=MaxGDP-MinGDP)
+ggplot(gapminder, aes((MinGDP=min(gdpPercap)), continent)) +
+  ggridges::geom_density_ridges()
+
+gapminder %>% 
+  group_by(continent) %>% 
+  summarise(MinGDP=min(gdpPercap),Mincountry=country[gdpPercap==MinGDP],Minyear=year[gdpPercap==MinGDP],MaxGDP=max(gdpPercap),Maxcountry=country[gdpPercap==MaxGDP],Maxyear=year[gdpPercap==MaxGDP])%>% 
+  mutate(Range=MaxGDP-MinGDP)%>%
+
+  ggplot(mtcars, aes(cyl)) +
+  geom_bar()
+
+  
+  
+  
+  ggplot(aes(MinGDP, MaxGDP, fill = "Continent")) +
+  geom_bar(position = "dodge", stat = "identity") +
+  theme_bw()
+
+
+gapminder %>% 
+  group_by(continent) %>% 
+  summarise(MinGDP=min(gdpPercap),Mincountry=country[gdpPercap==MinGDP],Minyear=year[gdpPercap==MinGDP],MaxGDP=max(gdpPercap),Maxcountry=country[gdpPercap==MaxGDP],Maxyear=year[gdpPercap==MaxGDP])%>% 
+  mutate(Range=MaxGDP-MinGDP)%>%
+
+  ggplot(aes(MinGDP, MaxGDP, fill = "Continent")) +
+  geom_bar(position = "dodge", stat = "identity") +
+  theme_bw()
+
+
+
+  
+ggplot(gapminder, aes((MinGDP=min(gdpPercap)),continent)) +
+  ggridges::geom_density_ridges()
+
+
+
+
+
+
+
+
+
+
+
+
 
 gapminder %>% 
   group_by(MinGDP=min(gdpPercap),MaxGDP=max(gdpPercap)) %>%
-  ggplot(aes(country,year)) + 
-  geom_point(color = "blue")+
+  ggplot(aes(continent,year,color=gdpPercap)) + 
+  geom_line(color="blue")+
+  geom_line(color="green")
   labs(x="country",y="year",
   title = "Cylinders vs horsepower",
   subtitle= "Information from mtcars"
   )
+  
+gapminder %>% 
+  group_by(MinGDP=min(gdpPercap),MaxGDP=max(gdpPercap)) %>%
+  ggplot(aes(continent,year,color=gdpPercap)) + 
+  geom_line(color="blue")+
+  geom_line(color="green")
+  labs(x="country",y="year",
+  title = "Cylinders vs horsepower",
+  subtitle= "Information from mtcars"
+  )  
+  
+
+  
+  
+  gapminder %>% 
+  #group_by(country) %>% 
+  ggplot(aes(year, lifeExp,group=country,color=country)) +
+  geom_line(alpha=0.2)
+  
 ```
 
 Task 3-use a boxplot?
