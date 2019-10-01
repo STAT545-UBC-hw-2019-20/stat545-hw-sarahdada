@@ -11,6 +11,30 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 ```{r}
+tibblemtcars<-tibble::as_tibble(mtcars)
+tibblemtcars
+```
 
+
+Task 1
+Re-load the packages that you need.
+```{r}
+library(tidyverse)
+library(gapminder)
+library(ggridges)
+library(scales)
+```
+```{r}
+gapminderdecrease <- gapminder %>%
+  arrange(country,year) %>%
+  mutate(laglifeExp = lag(lifeExp,1)) %>%
+  mutate (yearlychangelifeExp = lifeExp-laglifeExp) %>%
+  filter(yearlychangelifeExp <0) 
+
+increaselifeExp <- gapminder %>%
+  arrange(country,year) %>%
+  mutate(laglifeExp = lag(lifeExp,1)) %>%
+  mutate (yearlychangelifeExp = lifeExp-laglifeExp) %>%
+  filter(yearlychangelifeExp >0)
 ```
 
