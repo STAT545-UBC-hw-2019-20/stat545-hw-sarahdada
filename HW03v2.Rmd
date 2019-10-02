@@ -39,7 +39,6 @@ Task5: Here, I showed the life expectancy changes over time by continent. I did 
 library(gapminder)
 library(tidyverse)
 
-
 gapminder5<-gapminder %>%
   group_by(continent)%>%
   select(continent,lifeExp,year)%>%
@@ -55,10 +54,29 @@ gapminder5 %>%
  
 ```
 
-```
-task 4- Compute a weighted mean by population
+Task 3-Look at the spread with in continents-  of the interquartile range-geom boxplot or geom violin.
 ```{r}
+GapminderPercap<-gapminder %>%
+  group_by(continent)%>%
+    select(continent,gdpPercap)
 
+print(GapminderPercap)
+
+GapminderPercap %>% mutate(mean=mean(gdpPercap))
+  
+GapminderPercap %>% 
+dplyr::filter(n > quantile(n, 0.25), 
+                n < quantile(n, 0.75))
+
+GapminderPercap %>% spread(continent,n)
+
+
+Continentcount %>% 
+  ggplot(aes(x = continent, y = n))+
+    geom_bar(stat = "identity") +
+    labs(x = "Continent",y = "Number of Countries")
+      title = "Number of countries in each Continent"
+      subtitle = "(based on 2007 gapminder data)
 ```
 
 
@@ -68,16 +86,12 @@ extra
 ```{r}
 label
 
-
-
-
 ggplot(mpg, aes(cty, hwy)) +
   geom_point() +
   geom_jitter(alpha=0.5,size=1)+
   geom_smooth(method="lm")
   
-   gapminder2 %>% 
-  filter(continent != "Oceania") %>% 
+  gapminder2 %>% 
   ggplot(aes(gdpPercap, lifeExp, size=pop, color=continent)) +
   facet_wrap(~ continent, nrow=1) +
   geom_point(alpha = 0.8) +
