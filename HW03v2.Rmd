@@ -34,28 +34,29 @@ ggridges::geom_density_ridges()+labs(x="Maximum GDP",y="Continent")
 
 ```
 Task5: Here, I showed the life expectancy changes over time by continent. I did this by showing the difference between two years' life expectancy, over many years. I graphed this by coloring based on continent, so you could see a pattern over many years. I changed the figure size to an appropriate height and Width
-```{r, fig.width = 10, fig.height = 10}
+```{r, fig.width = 10, fig.height = 30}
 
 library(gapminder)
 library(tidyverse)
 
+
 gapminder5<-gapminder %>%
   group_by(continent)%>%
-  select(continent,gdpPercap,year)%>%
-  mutate(laggdpPercap = lag(gdpPercap,1)) %>%
-  mutate (yearlygdpPercap = gdpPercap-laggdpPercap)
+  select(continent,lifeExp,year)%>%
+  mutate(laglifeExp = lag(lifeExp,1)) %>%
+  mutate (ChangeLifeExp = lifeExp-laglifeExp)
 
 print(gapminder5)
 
 gapminder5 %>%
-  ggplot(aes(year, yearlygdpPercap, color=continent)) +
+  ggplot(aes(year, ChangeLifeExp, color=continent)) +
   geom_line(aes(group = continent), alpha = 0.5) +
-  ylab("GDP per capita")+xlab("Year")
+  ylab("Change in Life Expectancy")+xlab("Year")
  
 ```
 
 ```
-task 3
+task 4- Compute a weighted mean by population
 ```{r}
 
 ```
