@@ -1,0 +1,70 @@
+---
+title: "HW03v3"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(gapminder)
+library(ggridges)
+library(scales)
+```
+
+```{r}
+gapminder %>% 
+  group_by(continent) %>% 
+  summarise(MinGDP=min(gdpPercap),Mincountry=country[gdpPercap==MinGDP],Minyear=year[gdpPercap==MinGDP],MaxGDP=max(gdpPercap),Maxcountry=country[gdpPercap==MaxGDP],Maxyear=year[gdpPercap==MaxGDP])%>% 
+  mutate(Range=MaxGDP-MinGDP)
+
+  boxplot(gdpPercap~continent, data=gapminder, notch=TRUE,
+  col=(c("gold","darkgreen")),
+  main="GDP vs several continents", xlab="Continents", ylab="GDPperCapita")
+  
+#OR you could look at the max and min seperately, but more closely using the following two graphs:
+
+ggplot(gapminder, aes((MinGDP=min(gdpPercap)),continent,fill=continent)) +
+ggridges::geom_density_ridges()+labs(x="Minimum GDP",y="Continent")
+
+ggplot(gapminder, aes((MaxGDP=max(gdpPercap)),continent, fill=continent)) +
+ggridges::geom_density_ridges()+labs(x="Maximum GDP",y="Continent")
+```
+
+```{r}
+gapminder5<-gapminder %>%
+  group_by(continent)%>%
+  select(continent,lifeExp,year)%>%
+  mutate(laglifeExp = lag(lifeExp,1)) %>%
+  mutate (ChangeLifeExp = lifeExp-laglifeExp)
+
+print(gapminder5)
+
+gapminder5 %>%
+  ggplot(aes(year, ChangeLifeExp, color=continent)) +
+  geom_line(aes(group = continent), alpha = 0.5) +
+  ylab("Change in Life Expectancy")+xlab("Year")
+```
+
+```{r}
+
+GapminderPercap<-gapminder %>%
+  group_by(continent)%>%
+  mutate(mean=mean(lifeExp))%>%
+  summarise(median=median(lifeExp),standarddev=sd(lifeExp),mean=mean(lifeExp),InterquartileRange=IQR(lifeExp))%>%
+  mutate(mean > quantile(mean, 0.25), 
+                mean < quantile(mean, 0.75))
+
+GapminderPercap %>% spread(continent,mean)
+
+print(GapminderPercap)
+
+ggplot(gapminder, aes(continent, lifeExp)) +
+  geom_boxplot()+
+    labs(x = "Continent",y = "Life Expectancy")
+      title = "Life Expectancy per Continent"
+      subtitle = "(based on gapminder data)
+```
+

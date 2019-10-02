@@ -1,5 +1,5 @@
 ---
-title: "extra"
+title: "HW03 version 2"
 output: html_document
 ---
 
@@ -12,6 +12,8 @@ library(gapminder)
 library(ggridges)
 library(scales)
 ```
+**Note: I went to office hours to try and solve my knitting issue. It was resolved, and now has come up again. I will ask the TAs again next office hours.
+
 This is task two, where I get the maximum and minimum GDP per capita for all continents. The year for minimum GDP was 1952 for Asia, Europe, and Oceania. It was 2002 and 2007 in Africa and the Americas, respectively. The minimum GDP was 10039.59 for Oceania, which is much higher than 241.17 for Africa. The maximum GDP of all of the countries was in the Asia in 2007, with 113523.13 in Kuwait, in 1957. I have made a boplot showing the maximum and minimum GDP per continent. I have also made seperate maximum and minimum graphs which show more detailed numbers, which looks more beautiful, but which I can't combine. I tried to make a column graph that combined the two variables, but I could not figure out how to tell R that I wanted the X axis to be a combination of the minimum and maximum variables.
 
 ```{r}
@@ -33,7 +35,7 @@ ggplot(gapminder, aes((MaxGDP=max(gdpPercap)),continent, fill=continent)) +
 ggridges::geom_density_ridges()+labs(x="Maximum GDP",y="Continent")
 
 ```
-Task5: Here, I showed the life expectancy changes over time by continent. I did this by showing the difference between two years' life expectancy, over many years. I graphed this by coloring based on continent, so you could see a pattern over many years. I changed the figure size to an appropriate height and Width
+Task5: Here, I showed the life expectancy changes over time by continent. I did this by showing the difference between two years' life expectancy, over many years. I graphed this by coloring based on continent, so you could see a pattern over many years by following a single line per continent. I changed the figure size to an appropriate height and width. There are many massive spikes as there are decreases and increases in population in several continents.
 ```{r, fig.width = 10, fig.height = 30}
 
 library(gapminder)
@@ -54,7 +56,7 @@ gapminder5 %>%
  
 ```
 
-Task 3-Look at the spread with in continents. I am going to show life expectancy. This gives you the mean  
+Task 3-Look at the spread with in continents. I am going to show life expectancy. This gives you the mean, median, standard deciation, and interquartile range. I also mutated it, to show if mean is larger than the 25% range, or less than the 75% range, just for interest's sake. This gives you a true or false statement. Finally, I have added a column with the mean life expectancy spread. I used a boxplot to demonstrate this data, with mean, median, and Interquartile range.  
 
 ```{r}
 GapminderPercap<-gapminder %>%
@@ -73,26 +75,5 @@ ggplot(gapminder, aes(continent, lifeExp)) +
     labs(x = "Continent",y = "Life Expectancy")
       title = "Life Expectancy per Continent"
       subtitle = "(based on gapminder data)
-```
-
-
-
-
-extra
-```{r}
-label
-
-ggplot(mpg, aes(cty, hwy)) +
-  geom_point() +
-  geom_jitter(alpha=0.5,size=1)+
-  geom_smooth(method="lm")
-  
-  gapminder2 %>% 
-  ggplot(aes(gdpPercap, lifeExp, size=pop, color=continent)) +
-  facet_wrap(~ continent, nrow=1) +
-  geom_point(alpha = 0.8) +
-  scale_x_log10(labels = scales::comma_format())+
-  scale_size_area()
-
 ```
 
