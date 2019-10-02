@@ -54,29 +54,25 @@ gapminder5 %>%
  
 ```
 
-Task 3-Look at the spread with in continents-  of the interquartile range-geom boxplot or geom violin.
+Task 3-Look at the spread with in continents. I am going to show life expectancy. This gives you the mean  
+
 ```{r}
 GapminderPercap<-gapminder %>%
   group_by(continent)%>%
-    select(continent,gdpPercap)
+  mutate(mean=mean(lifeExp))%>%
+  summarise(median=median(lifeExp),standarddev=sd(lifeExp),mean=mean(lifeExp),InterquartileRange=IQR(lifeExp))%>%
+  mutate(mean > quantile(mean, 0.25), 
+                mean < quantile(mean, 0.75))
+
+GapminderPercap %>% spread(continent,mean)
 
 print(GapminderPercap)
 
-GapminderPercap %>% mutate(mean=mean(gdpPercap))
-  
-GapminderPercap %>% 
-dplyr::filter(n > quantile(n, 0.25), 
-                n < quantile(n, 0.75))
-
-GapminderPercap %>% spread(continent,n)
-
-
-Continentcount %>% 
-  ggplot(aes(x = continent, y = n))+
-    geom_bar(stat = "identity") +
-    labs(x = "Continent",y = "Number of Countries")
-      title = "Number of countries in each Continent"
-      subtitle = "(based on 2007 gapminder data)
+ggplot(gapminder, aes(continent, lifeExp)) +
+  geom_boxplot()+
+    labs(x = "Continent",y = "Life Expectancy")
+      title = "Life Expectancy per Continent"
+      subtitle = "(based on gapminder data)
 ```
 
 
