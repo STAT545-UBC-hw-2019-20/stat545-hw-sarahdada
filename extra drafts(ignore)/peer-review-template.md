@@ -1,18 +1,18 @@
-Peer-Review HW-xx for Daniel Stewart (dstewart86)
+Peer-Review HW-xx for kgwkyle
 ----------------------------------------------------
 Topic                       | Excellent | Satisfactory | Needs Work |
 ----------------------------|-----|-----|-----|
 **Coding style**            | :heavy_check_mark: |  |  |
 **Coding strategy**         |  | :heavy_check_mark: |  |
-**Presentation: graphs**    
-**Presentation: tables**    
+**Presentation: graphs**    |  | :heavy_check_mark: |  |
+**Presentation: tables**    |  | :heavy_check_mark: |  |
 **Achievement, creativity** | :heavy_check_mark: |  |  |
-**Ease of access**          | :heavy_check_mark: |  |  |
+**Ease of access**         |  | :heavy_check_mark: |  |
 
 Remarks:
 
-- Great work! Simple coding, and it got the assignment done.
-- You did a good job explaining your work.
-- I learned a lot about how to keep isoslides simple- mine had all sorts of bugs because I was trying something.
-- Not much criticism. 
-- You can do different font types and sizes on isoslides.
+-Nice job getting the html link to work. I just wrote needs work, because I think a little more detail on your code choice would be great.
+-Your graphs are really great for what we had learned!
+-I learned how to use round, and I was looking for a similar instruction earlier today! Also I had never seen the use of slice.
+-Nice use of simple blocks of code, I think that maybe you could have put some chunks of code together to make it more cohesive.
+-I used lag a little differently, naming what I used as a new term and then subtracting years by subtracting current minus lag. Might have worked for you!

@@ -31,6 +31,17 @@ gapminder %>%
 ggplot(gapminder, aes((MinGDP=min(gdpPercap)),continent,fill=continent)) +
 ggridges::geom_density_ridges()+labs(x="Minimum GDP",y="Continent")
 
+ggplot(gapminder, aes(y =continent))+
+  ggridges::geom_density_ridges(aes((MinGDP=min(gdpPercap))), fill="red")+
+  ggridges::geom_density_ridges(aes((MaxGDP=max(gdpPercap)),continent,fill=continent), alpha=0.2)
+
+  ggplot(aes(y = YearFct)) +
+  geom_density_ridges(
+    aes(x = Percent, fill = paste(YearFct, Option)), 
+    alpha = .8, color = "white", from = 0, to = 100
+  ) +
+  labs(
+
 ggplot(gapminder, aes((MaxGDP=max(gdpPercap)),continent, fill=continent)) +
 ggridges::geom_density_ridges()+labs(x="Maximum GDP",y="Continent")
 
@@ -72,8 +83,8 @@ print(GapminderPercap)
 
 ggplot(gapminder, aes(continent, lifeExp)) +
   geom_boxplot()+
-    labs(x = "Continent",y = "Life Expectancy")
-      title = "Life Expectancy per Continent"
-      subtitle = "(based on gapminder data)
+    labs(x = "Continent",y = "Life Expectancy",
+      title = "Life Expectancy per Continent",
+      subtitle = "based on gapminder data")
 ```
 
