@@ -8,6 +8,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
+install.packages("tidyverse")
+devtools::install_github("tidyverse/tidyr")
+library(tidyr)
 library(tidyverse)
 library(gapminder)
 ```
@@ -20,18 +23,38 @@ I am going to pivor wider, and aim to have country on left of dash, and lifeExp 
 
 
 ```{r}
+
+
 gapminder2<-gapminder%>%
   select(year,country,lifeExp)%>%
-  dplyr::filter(country=="Canada"|country=="Afghanastan")
+  dplyr::filter(country=="Canada"|country=="Albania")
 
 gapminder2
 
-gapminder2 %>% 
+gapminder3<-(gapminder2 %>% 
+  pivot_wider(id_cols     = c(-country,-lifeExp),
+              names_from  = country, 
+              values_from = lifeExp))
+
+gapminder3
+#now i need to change titles so it says that it is the country's life expectancy( says top tutorial)
+
+gapminder2<-gapminder%>%
+  select(year,country,lifeExp)%>%
+  dplyr::filter(country=="Canada"|country=="Albania")%>% 
+  pivot_wider(id_cols     = c(-country,-lifeExp),
+              names_from  = country, 
+              values_from = lifeExp)
+
+gapminder2
+
+#i need second part not to be specific, what does value from mean
+#didnt work
+#gapminder2 %>% 
   pivot_wider(id_cols     = c(-year),
               names_from  = c(country, lifeExp), 
               names_sep   = "_", 
-              values_from = Yearsliving)
-
+              values_from = lifeExp)
 
 
 ```
