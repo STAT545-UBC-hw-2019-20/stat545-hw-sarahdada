@@ -1,0 +1,38 @@
+---
+title: "HW04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+count(wt_vars=words) means if there is an option, what 
+left is the first seperation, right of dash is the next seperation.- here that is part, dimension, seperated by an underscore.
+
+
+I am going to pivor wider, and aim to have country on left of dash, and lifeExp on right of dash, per year. 
+
+
+```{r}
+gapminder2<-gapminder%>%
+  select(year,country,lifeExp)%>%
+  dplyr::filter(country=="Canada"|country=="Afghanastan")
+
+gapminder2
+
+gapminder2 %>% 
+  pivot_wider(id_cols     = c(-year),
+              names_from  = c(country, lifeExp), 
+              names_sep   = "_", 
+              values_from = Yearsliving)
+
+
+
+```
+
