@@ -20,42 +20,89 @@ left is the first seperation, right of dash is the next seperation.- here that i
 
 
 I am going to pivor wider, and aim to have country on left of dash, and lifeExp on right of dash, per year. 
+#now i need to change titles so it says that it is the country's life expectancy( says top tutorial)
 
+
+
+
+
+I needed to add 3 versions of gapminder, because I needed to plot only the data from above. otherwise, what is y??? because you cant say y is albania and canada? how do you state two y TYPES, itll be something like "part" or dimension" in iris"
+is it dbl? double? in iris how does it know what part and dimension it is?
+
+gapminder3 %>% 
+    ggplot(aes(x = year, lifeExp)) + 
+  geom_point(color = "Blue")+
+    labs(
+      x="Canada, Albania",
+      y="Life Expectancy",
+      title = "Life Expectancy per country",
+      subtitle = "taken from Gapminder data"
+      )
+      
+      #how do i change color to specific country
+gapminder2 %>% 
+  ggplot(aes(x = year, y = lifeExp)) + 
+  geom_point(color = Canada=="blue", color=Albania=="green")+
+    labs(
+      x="Canada, Albania",
+      y="Life Expectancy",
+      title = "Life Expectancy per country",
+      subtitle = "taken from Gapminder data"
+      )      
+      
+#scatterplot-thats geompoint
+#relengthen
 
 ```{r}
-
-
 gapminder2<-gapminder%>%
   select(year,country,lifeExp)%>%
   dplyr::filter(country=="Canada"|country=="Albania")
 
-gapminder2
-
-gapminder3<-(gapminder2 %>% 
+gapminder3<-gapminder2%>% 
   pivot_wider(id_cols     = c(-country,-lifeExp),
               names_from  = country, 
-              values_from = lifeExp))
+              values_from = lifeExp)
 
 gapminder3
-#now i need to change titles so it says that it is the country's life expectancy( says top tutorial)
 
-gapminder2<-gapminder%>%
-  select(year,country,lifeExp)%>%
-  dplyr::filter(country=="Canada"|country=="Albania")%>% 
-  pivot_wider(id_cols     = c(-country,-lifeExp),
-              names_from  = country, 
-              values_from = lifeExp)
+gapminder2 %>% 
+  ggplot(aes(x = year, y = lifeExp)) + 
+  geom_point(color="blue")+
+    labs(
+      x="Canada, Albania",
+      y="Life Expectancy",
+      title = "Life Expectancy per country",
+      subtitle = "taken from Gapminder data"
+      )    
 
-gapminder2
+#relengthen
 
-#i need second part not to be specific, what does value from mean
-#didnt work
-#gapminder2 %>% 
-  pivot_wider(id_cols     = c(-year),
+gapminder3 %>% 
+  pivot_wider(id_cols     = c(year),
               names_from  = c(country, lifeExp), 
               names_sep   = "_", 
-              values_from = lifeExp)
+              values_from = country)
 
+#country isnt a thing, so what are y values called????
+
+
+(guest_long <- guest %>% 
+  pivot_longer(cols      = c(-party,-name), 
+               names_to  = c(".value","event"),
+               names_sep = "_"))
+
+guest_long %>% 
+  pivot_wider(id_cols     = c(party, name), 
+              names_from  = event, 
+              names_sep   = "_", 
+              values_from = c(meal, attendance))
+
+
+
+```
+ASSIGNMENT 2
+
+```{r}
 
 ```
 
