@@ -116,6 +116,8 @@ gapmindermultilong
 ```{r}
 #assignment 3
 
+guest <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/attend.csv")
+email <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/emails.csv")
 
 ```
 ```{r}
