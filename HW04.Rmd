@@ -65,9 +65,6 @@ gapminder3<-gapminder2%>%
               names_from  = country, 
               values_from = lifeExp)
 
-gg <- gather(gapminder3, key = "Country", value = "Life Expectancy", -year)
-
-gg
 
 gapminder3
 
@@ -111,9 +108,41 @@ guest_long %>%
               values_from = c(meal, attendance))
 
 
-
+#can you have 1952 canada and 1952 albania
 
 gg %>% 
   ggplot(aes(x ))
+```
+```{r}
+gapmindermulti<-gapminder%>%
+  select(year,country,lifeExp,gdpPercap)%>%
+  dplyr::filter(country=="Canada"|country=="Albania")
+
+gapmindermulti
+
+gapmindermulti2<-gapmindermulti%>% 
+  pivot_wider(id_cols     = c(years),
+              names_from  = country, 
+              values_from = lifeExp,gdpPercap)
+
+
+```
+```{r}
+
+```
+```{r}
+gapminder_wide <- gapminder %>% 
+  filter(country %in% c("Canada", "China")) %>% # Filter for rows with Canada or China
+  pivot_wider(id_cols = c(country, year), # Keep countries and year columns
+              values_from = lifeExp, # Cells of new columns will contain lifeExp values
+              names_from = country) # Newly generated columns are named by the values
+                                    # of the country column
+
+gapminder_wide %>% 
+  ggplot(aes(x = Canada, y = China)) + # Specify the x and y variables for ggplot
+  geom_point() + # Add point aesthetics for each data point
+  xlab("Canada life expectancy (yrs)") + # label x axis
+  ylab("China life expectancy (yrs)") + # label y axis
+  ggtitle("Correlation between the life expectancies of China and Canada")
 ```
 
