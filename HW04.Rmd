@@ -58,18 +58,24 @@ gapminder2<-gapminder%>%
   select(year,country,lifeExp)%>%
   dplyr::filter(country=="Canada"|country=="Albania")
 
+gapminder2
+
 gapminder3<-gapminder2%>% 
   pivot_wider(id_cols     = c(-country,-lifeExp),
               names_from  = country, 
               values_from = lifeExp)
 
+gg <- gather(gapminder3, key = "Country", value = "Life Expectancy", -year)
+
+gg
+
 gapminder3
 
 gapminder2 %>% 
-  ggplot(aes(x = year, y = lifeExp)) + 
-  geom_point(color="blue")+
+  ggplot(aes(x = year, y = lifeExp, colour = country)) + 
+  geom_point()+
     labs(
-      x="Canada, Albania",
+      x="Year",
       y="Life Expectancy",
       title = "Life Expectancy per country",
       subtitle = "taken from Gapminder data"
@@ -83,6 +89,13 @@ gapminder3 %>%
               names_sep   = "_", 
               values_from = country)
 
+
+
+
+```
+ASSIGNMENT 2
+
+```{r}
 #country isnt a thing, so what are y values called????
 
 
@@ -99,10 +112,8 @@ guest_long %>%
 
 
 
-```
-ASSIGNMENT 2
 
-```{r}
-
+gg %>% 
+  ggplot(aes(x ))
 ```
 
