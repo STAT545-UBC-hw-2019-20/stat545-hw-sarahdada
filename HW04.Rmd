@@ -53,20 +53,65 @@ gapminder2 %>%
 #scatterplot-thats geompoint
 #relengthen
 
+#do i need the print??
+
 ```{r}
-gapminder2<-gapminder%>%
+print(
+gapminderlife<-gapminder%>%
   select(year,country,lifeExp)%>%
-  dplyr::filter(country=="Canada"|country=="Albania")
-
-gapminder2
-
-gapminder3<-gapminder2%>% 
+  dplyr::filter(country=="Canada"|country=="Albania")%>% 
   pivot_wider(id_cols     = c(-country,-lifeExp),
               names_from  = country, 
               values_from = lifeExp)
+)
 
 
-gapminder3
+gapminderlife %>% 
+  ggplot(aes(x = Canada, y = Albania)) + 
+  geom_point() + # 
+    labs(
+      x="Canada Life Expectancy in years",
+      y="Albania Life Expectancy in years",
+      title = "Life Expectancy of Canada vs Albania",
+      subtitle = "taken from Gapminder data"
+      ) 
+
+
+print
+(gapminderlifelong<-gapminderlife %>% 
+  pivot_longer(cols     = (-year),
+              names_to  = "country", 
+              values_to = "lifeExp") 
+)
+  
+
+```
+ASSIGNMENT 2
+
+```{r}
+gapmindermulti<-gapminder%>%
+  dplyr::filter(country=="Canada"|country=="Albania")%>% 
+  pivot_wider(id_cols     = c(country,year),
+              names_from  = country, 
+              names_sep   = "_",
+              values_from = c(lifeExp,gdpPercap))
+
+gapmindermulti
+
+#expand
+
+```
+```{r}
+
+
+
+```
+```{r}
+
+```
+```{r}
+
+#Extra
 
 gapminder2 %>% 
   ggplot(aes(x = year, y = lifeExp, colour = country)) + 
@@ -77,72 +122,5 @@ gapminder2 %>%
       title = "Life Expectancy per country",
       subtitle = "taken from Gapminder data"
       )    
-
-#relengthen
-
-gapminder3 %>% 
-  pivot_wider(id_cols     = c(year),
-              names_from  = c(country, lifeExp), 
-              names_sep   = "_", 
-              values_from = country)
-
-
-
-
-```
-ASSIGNMENT 2
-
-```{r}
-#country isnt a thing, so what are y values called????
-
-
-(guest_long <- guest %>% 
-  pivot_longer(cols      = c(-party,-name), 
-               names_to  = c(".value","event"),
-               names_sep = "_"))
-
-guest_long %>% 
-  pivot_wider(id_cols     = c(party, name), 
-              names_from  = event, 
-              names_sep   = "_", 
-              values_from = c(meal, attendance))
-
-
-#can you have 1952 canada and 1952 albania
-
-gg %>% 
-  ggplot(aes(x ))
-```
-```{r}
-gapmindermulti<-gapminder%>%
-  select(year,country,lifeExp,gdpPercap)%>%
-  dplyr::filter(country=="Canada"|country=="Albania")
-
-gapmindermulti
-
-gapmindermulti2<-gapmindermulti%>% 
-  pivot_wider(id_cols     = c(years),
-              names_from  = country, 
-              values_from = lifeExp,gdpPercap)
-
-
-```
-```{r}
-
-```
-```{r}
-gapminder_wide <- gapminder %>% 
-  filter(country %in% c("Canada", "China")) %>% # Filter for rows with Canada or China
-  pivot_wider(id_cols = c(country, year), # Keep countries and year columns
-              values_from = lifeExp, # Cells of new columns will contain lifeExp values
-              names_from = country) # Newly generated columns are named by the values
-                                    # of the country column
-
-gapminder_wide %>% 
-  ggplot(aes(x = Canada, y = China)) + # Specify the x and y variables for ggplot
-  geom_point() + # Add point aesthetics for each data point
-  xlab("Canada life expectancy (yrs)") + # label x axis
-  ylab("China life expectancy (yrs)") + # label y axis
-  ggtitle("Correlation between the life expectancies of China and Canada")
 ```
 
