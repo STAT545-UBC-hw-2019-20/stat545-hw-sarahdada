@@ -121,6 +121,21 @@ email <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/maste
 
 
 
+separate_email <- guest %>%
+  rename(guest= "name")%>%
+           separate_rows (guest, sep = "_")
+
+separate_email %>% 
+
+
+
+
+part 2
+
+email_sep %>%
+  anti_join(guest, by = c("name"))
+  
+
 
 #For each guest in the guestlist (guest tibble), add a column for email address, which can be found in the email tibble .
 ```
