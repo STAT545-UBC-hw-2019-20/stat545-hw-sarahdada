@@ -100,6 +100,13 @@ gapmindermulti
 
 #expand
 
+gapmindermultilong <-gapmindermulti %>% 
+  pivot_longer(cols     = (-year),
+              names_sep = "_", 
+              names_to = c(".value", "country"))
+
+gapmindermultilong  
+
 ```
 ```{r}
 
@@ -107,6 +114,8 @@ gapmindermulti
 
 ```
 ```{r}
+#assignment 3
+
 
 ```
 ```{r}
