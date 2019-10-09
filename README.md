@@ -3,6 +3,8 @@ _This file_ allows me to submit my homework assignments for marks. I have tagged
 (https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-sarahdada/blob/master/HW04/HW04.html) 
 and the assignment is: [https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-sarahdada/tree/master/HW04]
 
+If someone could point out why my links won't work when I say "here", that would be amazing.
+
 ## Now, I am going to tell you a little bit about myself. \*Laughs uncertainly\*
   
 I am a graduate student in the faculty of Biochemistry and Molecular Biology.
