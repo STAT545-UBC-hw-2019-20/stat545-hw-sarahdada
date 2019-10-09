@@ -8,52 +8,18 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-install.packages("tidyverse")
-devtools::install_github("tidyverse/tidyr")
 library(tidyr)
 library(tidyverse)
 library(gapminder)
 ```
 
-count(wt_vars=words) means if there is an option, what 
-left is the first seperation, right of dash is the next seperation.- here that is part, dimension, seperated by an underscore.
+1.1
 
+Installed tidyverse again so that I could get the pivot functions. I selected the columns that mattered to me, and then I filtered so that the countries that I would focus on were Canada and Albania. 
 
-I am going to pivor wider, and aim to have country on left of dash, and lifeExp on right of dash, per year. 
-#now i need to change titles so it says that it is the country's life expectancy( says top tutorial)
+Then I left the year the same, but changed the columns to represent Canada and Albania, and had life expectancy values under those
 
-
-
-
-
-I needed to add 3 versions of gapminder, because I needed to plot only the data from above. otherwise, what is y??? because you cant say y is albania and canada? how do you state two y TYPES, itll be something like "part" or dimension" in iris"
-is it dbl? double? in iris how does it know what part and dimension it is?
-
-gapminder3 %>% 
-    ggplot(aes(x = year, lifeExp)) + 
-  geom_point(color = "Blue")+
-    labs(
-      x="Canada, Albania",
-      y="Life Expectancy",
-      title = "Life Expectancy per country",
-      subtitle = "taken from Gapminder data"
-      )
-      
-      #how do i change color to specific country
-gapminder2 %>% 
-  ggplot(aes(x = year, y = lifeExp)) + 
-  geom_point(color = Canada=="blue", color=Albania=="green")+
-    labs(
-      x="Canada, Albania",
-      y="Life Expectancy",
-      title = "Life Expectancy per country",
-      subtitle = "taken from Gapminder data"
-      )      
-      
-#scatterplot-thats geompoint
-#relengthen
-
-#do i need the print??
+I could not figure out how to Change the names to "Life Expectancy Canada" and "Life Expectancy Albania"
 
 ```{r}
 print(
@@ -65,6 +31,7 @@ gapminderlife<-gapminder%>%
               values_from = lifeExp)
 )
 
+#1.2 I plotted the countries against each other using geom_point for a scatterplot.
 
 gapminderlife %>% 
   ggplot(aes(x = Canada, y = Albania)) + 
@@ -76,6 +43,7 @@ gapminderlife %>%
       subtitle = "taken from Gapminder data"
       ) 
 
+#Then I returned the data to an original state, with year staying the same, and country and life expectancy going into the long format
 
 print
 (gapminderlifelong<-gapminderlife %>% 
@@ -87,7 +55,7 @@ print
 
 ```
 ASSIGNMENT 2
-
+2.1 I filtered for Canada and Albania again, then I selected the country and year as the names that would be used for the new columns, and I asked for the values in those new columns to come from the life expectancy and gdp per capita. The left shows values, and the right shows the country it is relative to. 
 ```{r}
 gapmindermulti<-gapminder%>%
   dplyr::filter(country=="Canada"|country=="Albania")%>% 
@@ -98,7 +66,7 @@ gapmindermulti<-gapminder%>%
 
 gapmindermulti
 
-#expand
+#2.2 I expanded the work back to it's original state. I don't fully understand why .value represents the correct x, but we learned it in class so I am doing it.
 
 gapmindermultilong <-gapmindermulti %>% 
   pivot_longer(cols     = (-year),
@@ -108,18 +76,14 @@ gapmindermultilong <-gapmindermulti %>%
 gapmindermultilong  
 
 ```
+
 ```{r}
-
-
-
-```
-```{r}
-#assignment 3
+#Assignment 3
 
 guest <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/attend.csv")
 email <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/emails.csv")
 
-#3.1
+#3.1 I seperated the column names by guest, and then I joined them by having the name of the person be the same in both the email and guest lists, "name". Then I cleaned up, showing only what I wanted.
 new_email <- email %>%
     separate_rows (guest, sep = "_")
     
@@ -133,7 +97,7 @@ guest2
 email
 guest
 
-#I am renaming the guest to name, so that the setdiff function will be able to understand that "name" in email can compare against "name" in guest. I split the values so that name is in seperate rows- so that each person gets their own row.
+#I am renaming the guest to name, so that the setdiff function will be able to understand that "name" in email can compare against "name" in guest. I split the values so that name is in seperate rows- so that each person gets their own row. Then I set_diff so that it only shows me what has emails, but are not on the guest list.
 
 email2<-email%>%
   rename("name"=guest)%>%
@@ -144,7 +108,7 @@ email2%>%
 
 email2
 
-#3.3
+#3.3 I did the same thing as above, except I decided to use union to join the email and guest lists.
 
 email3<-email%>%
   rename("name"=guest)%>%
@@ -156,37 +120,4 @@ email3%>%
 email3
 
 ```
-```{r}
-
-#Extra
-
-gapminder2 %>% 
-  ggplot(aes(x = year, y = lifeExp, colour = country)) + 
-  geom_point()+
-    labs(
-      x="Year",
-      y="Life Expectancy",
-      title = "Life Expectancy per country",
-      subtitle = "taken from Gapminder data"
-      )    
-
-
-email_separate <- email %>% 
-  separate_rows(guest, sep = ", ")
-
-guest %>%
-  left_join(email_separate, c("name" = "guest")) 
-
-
-seperate_email%>%
-  select(party, name, email)
-
-
-guest2 <- guest %>%
-  left_join(email_sep, by = c("name")) %>%
-  select(party, name, email)
-guest2
-
-```
-
 
