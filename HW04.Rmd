@@ -119,34 +119,25 @@ gapmindermultilong
 guest <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/attend.csv")
 email <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/emails.csv")
 
+#3.1
+new_email <- email %>%
+    separate_rows (guest, sep = "_")
+    
+guest2<-guest %>% left_join(new_email, c("name" = "guest")) %>%
+    select(party, name, email)
 
-
-separate_email <- email %>%
-  rename(name=guest)%>%
-           separate_rows (guest, sep = "_")
-
-separate_email %>% 
-    left_join(email_sep, by = c("name"))
-  
-  email_sep <- 
-  email %>% 
-  separate_rows(guest, sep = ", ") %>%
-  rename(name = guest)
-guest2 <- guest %>%
-  left_join(email_sep, by = c("name")) %>%
-  select(party, name, email)
 guest2
 
 
+#3.2
 
+new_email %>% 
+  anti_join(guest, c("guest" = "name"))
 
-part 2
+#3.3
 
-email_sep %>%
-  anti_join(guest, by = c("name"))
-
-
-#For each guest in the guestlist (guest tibble), add a column for email address, which can be found in the email tibble .
+time %>% 
+  full_join(album, by = c("song","artist_name"))
 ```
 ```{r}
 
@@ -161,6 +152,24 @@ gapminder2 %>%
       title = "Life Expectancy per country",
       subtitle = "taken from Gapminder data"
       )    
+
+
+email_separate <- email %>% 
+  separate_rows(guest, sep = ", ")
+
+guest %>%
+  left_join(email_separate, c("name" = "guest")) 
+
+
+seperate_email%>%
+  select(party, name, email)
+
+
+guest2 <- guest %>%
+  left_join(email_sep, by = c("name")) %>%
+  select(party, name, email)
+guest2
+
 ```
 
 
