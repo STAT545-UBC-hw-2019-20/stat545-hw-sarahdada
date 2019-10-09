@@ -1,7 +1,7 @@
 # *This file is for the STAT545 UBC **statistics** course.* 
 _This file_ allows me to submit my homework assignments for marks. I have tagged the most recent versions, and I have named the items with relevance, such as HW01Iso, or HW01markdown. I am now on HW04!The HTML is:
-[https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-sarahdada/blob/master/HW04/HW04.html] (here)
-and the assignment is: [https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-sarahdada/tree/master/HW04] (here)
+[https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-sarahdada/blob/master/HW04/HW04.html] 
+and the assignment is: [https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-sarahdada/tree/master/HW04]
 
 ## Now, I am going to tell you a little bit about myself. \*Laughs uncertainly\*
   
