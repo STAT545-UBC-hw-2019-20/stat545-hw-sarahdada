@@ -1,0 +1,10 @@
+"0","guest_long %>% 
+  pivot_wider(id_cols     = c(party,name), 
+              names_from  = event, 
+              names_sep   = ""_"", 
+              values_from = (meal,attendance))
+"
+"2","Error: unexpected ',' in:
+""              names_sep   = ""_"", 
+              values_from = (meal,""
+"

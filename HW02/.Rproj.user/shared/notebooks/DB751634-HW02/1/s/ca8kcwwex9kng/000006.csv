@@ -1,0 +1,2 @@
+"0","gapminder1.1 %>%"
+"0","  dplyr::select(country,gdpPercap)"

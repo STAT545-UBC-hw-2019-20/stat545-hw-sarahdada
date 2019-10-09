@@ -1,0 +1,123 @@
+---
+title: "HW04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyr)
+library(tidyverse)
+library(gapminder)
+```
+
+1.1
+
+Installed tidyverse again so that I could get the pivot functions. I selected the columns that mattered to me, and then I filtered so that the countries that I would focus on were Canada and Albania. 
+
+Then I left the year the same, but changed the columns to represent Canada and Albania, and had life expectancy values under those
+
+I could not figure out how to Change the names to "Life Expectancy Canada" and "Life Expectancy Albania"
+
+```{r}
+print(
+gapminderlife<-gapminder%>%
+  select(year,country,lifeExp)%>%
+  dplyr::filter(country=="Canada"|country=="Albania")%>% 
+  pivot_wider(id_cols     = c(-country,-lifeExp),
+              names_from  = country, 
+              values_from = lifeExp)
+)
+
+#1.2 I plotted the countries against each other using geom_point for a scatterplot.
+
+gapminderlife %>% 
+  ggplot(aes(x = Canada, y = Albania)) + 
+  geom_point() + # 
+    labs(
+      x="Canada Life Expectancy in years",
+      y="Albania Life Expectancy in years",
+      title = "Life Expectancy of Canada vs Albania",
+      subtitle = "taken from Gapminder data"
+      ) 
+
+#Then I returned the data to an original state, with year staying the same, and country and life expectancy going into the long format
+
+print
+(gapminderlifelong<-gapminderlife %>% 
+  pivot_longer(cols     = (-year),
+              names_to  = "country", 
+              values_to = "lifeExp") 
+)
+  
+
+```
+ASSIGNMENT 2
+2.1 I filtered for Canada and Albania again, then I selected the country and year as the names that would be used for the new columns, and I asked for the values in those new columns to come from the life expectancy and gdp per capita. The left shows values, and the right shows the country it is relative to. 
+```{r}
+gapmindermulti<-gapminder%>%
+  dplyr::filter(country=="Canada"|country=="Albania")%>% 
+  pivot_wider(id_cols     = c(country,year),
+              names_from  = country, 
+              names_sep   = "_",
+              values_from = c(lifeExp,gdpPercap))
+
+gapmindermulti
+
+#2.2 I expanded the work back to it's original state. I don't fully understand why .value represents the correct x, but we learned it in class so I am doing it.
+
+gapmindermultilong <-gapmindermulti %>% 
+  pivot_longer(cols     = (-year),
+              names_sep = "_", 
+              names_to = c(".value", "country"))
+
+gapmindermultilong  
+
+```
+
+```{r}
+#Assignment 3
+
+guest <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/attend.csv")
+email <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/master/data/wedding/emails.csv")
+
+#3.1 I seperated the column names by guest, and then I joined them by having the name of the person be the same in both the email and guest lists, "name". Then I cleaned up, showing only what I wanted.
+new_email <- email %>%
+    separate_rows (guest, sep = "_")
+    
+guest2<-guest %>% left_join(new_email, c("name" = "guest")) %>%
+    select(party, name, email)
+
+guest2
+
+
+#3.2
+email
+guest
+
+#I am renaming the guest to name, so that the setdiff function will be able to understand that "name" in email can compare against "name" in guest. I split the values so that name is in seperate rows- so that each person gets their own row. Then I set_diff so that it only shows me what has emails, but are not on the guest list.
+
+email2<-email%>%
+  rename("name"=guest)%>%
+  select(name)%>%separate_rows("name",sep=",")
+
+email2%>%
+  setdiff(guest %>% select(name))
+
+email2
+
+#3.3 I did the same thing as above, except I decided to use union to join the email and guest lists.
+
+email3<-email%>%
+  rename("name"=guest)%>%
+  select(name)%>%separate_rows("name",sep=",")
+
+email3%>%
+ union(guest %>% select(name))
+
+email3
+
+```
+

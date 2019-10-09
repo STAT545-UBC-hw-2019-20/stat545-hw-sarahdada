@@ -1,0 +1,2 @@
+"0","gapminder1.1 <- gapminder %>% "
+"0","  dplyr::filter(country == 'Afghanistan'| country =='Vietnam' | country == 'Cambodia' && year == 1970:1979)"

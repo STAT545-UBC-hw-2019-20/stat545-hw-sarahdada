@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1569518341964.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2002446684",
+    "id" : "50BBE889",
+    "lastKnownWriteTime" : 1569520399,
+    "last_content_update" : 1569520399351,
+    "path" : "~/Desktop/Gitgood/STAT545-Participation-/cm008-exercise.Rmd",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "12,3",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
