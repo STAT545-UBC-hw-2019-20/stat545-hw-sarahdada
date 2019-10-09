@@ -130,14 +130,31 @@ guest2
 
 
 #3.2
+email
+guest
 
-new_email %>% 
-  anti_join(guest, c("guest" = "name"))
+#I am renaming the guest to name, so that the setdiff function will be able to understand that "name" in email can compare against "name" in guest. I split the values so that name is in seperate rows- so that each person gets their own row.
+
+email2<-email%>%
+  rename("name"=guest)%>%
+  select(name)%>%separate_rows("name",sep=",")
+
+email2%>%
+  setdiff(guest %>% select(name))
+
+email2
 
 #3.3
 
-time %>% 
-  full_join(album, by = c("song","artist_name"))
+email3<-email%>%
+  rename("name"=guest)%>%
+  select(name)%>%separate_rows("name",sep=",")
+
+email3%>%
+ union(guest %>% select(name))
+
+email3
+
 ```
 ```{r}
 
