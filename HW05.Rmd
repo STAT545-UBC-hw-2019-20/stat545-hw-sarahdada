@@ -100,9 +100,49 @@ goodtime<-read_csv(here("HW05", "CountryLifeExp.csv"))
 
 goodtime
 ```
-Assignment 5
+Assignment 4:  My previous work showed the number of countries per continent in year 2007, in black and white.
 ```{r}
+previous
+Continentcount<-(gapminder %>% 
+filter(year==2007) %>%
+count(continent)) 
+
+Continentcount %>% 
+  ggplot(aes(x = continent, y = n))+
+    geom_bar(stat = "identity") +
+    labs(x = "Continent",y = "Number of Countries")
+      title = "Number of countries in each Continent"
+      subtitle = "(based on 2007 gapminder data)
 
 ```
+
+```{r}
+#Now: I changed the bar graph so that each bar has a different colour to make it distinct. I removed the distracting grey background but kept the lines, so that you could still determine the number of countries, but it is more clear and clean. It was suggested in class to entirely remove the lines, but then you could not determine the number of countries. This was an in-between. I removed the x axis because it was redundant (those are evidently continents), but decided to keep the y axis, and put in a better title which properly explained the x and y axis. This makes the plot cleaner. The subtitle tells us where the data came from, however the subtitle dissappears when I add the plotly interactive component. I used plotly to make it interactive, so you can see data about how many countries are in a continent (denoted "n" when hovering) by hovering over the bar. I made this a seperate graph, so that one graph has the subtitle and is not interactive, and the other is an html widget. 
+  
+Continentcount<-(gapminder %>% 
+filter(year==2007) %>%
+count(continent)) 
+
+PrePlotlyContinent <- Continentcount %>% 
+  ggplot(aes(x = continent, y = n, fill=continent))+
+    geom_bar(stat = "identity") +
+labs(x="",
+  y="Number of Countries",
+  title = "Number of Countries per Continent", subtitle= "Data taken from year 2007 of the Gapminder data set"
+  ) + theme_bw()
+
+PrePlotlyContinent
+
+PrePlotlyContinent %>% ggplotly()
+
+```
+
+Assignment 5
+
+```{r}
+ggsave(here("HW05", "PrePlotlyContinent.png"))
+```
+
+
 
 
