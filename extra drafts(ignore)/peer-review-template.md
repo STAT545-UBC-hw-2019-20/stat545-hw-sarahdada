@@ -1,18 +1,18 @@
-Peer-Review HW-xx for kgwkyle
+Peer-Review HW-xx for jacobgerlofs
 ----------------------------------------------------
 Topic                       | Excellent | Satisfactory | Needs Work |
 ----------------------------|-----|-----|-----|
 **Coding style**            | :heavy_check_mark: |  |  |
-**Coding strategy**         |  | :heavy_check_mark: |  |
-**Presentation: graphs**    |  | :heavy_check_mark: |  |
-**Presentation: tables**    |  | :heavy_check_mark: |  |
-**Achievement, creativity** | :heavy_check_mark: |  |  |
-**Ease of access**         |  | :heavy_check_mark: |  |
+**Coding strategy**         | :heavy_check_mark: |  |
+**Presentation: graphs**    | :heavy_check_mark: |  |  |
+**Presentation: tables**    | :heavy_check_mark: |  |  |
+**Achievement, creativity** | :heavy_check_mark: |  |  
+**Ease of access**          |  | :heavy_check_mark:  |  |
 
 Remarks:
 
--Nice job getting the html link to work. I just wrote needs work, because I think a little more detail on your code choice would be great.
--Your graphs are really great for what we had learned!
--I learned how to use round, and I was looking for a similar instruction earlier today! Also I had never seen the use of slice.
--Nice use of simple blocks of code, I think that maybe you could have put some chunks of code together to make it more cohesive.
--I used lag a little differently, naming what I used as a new term and then subtracting years by subtracting current minus lag. Might have worked for you!
+-Your read me is having a really tough time- you might want to figure out why it is spewing words.
+-I really liked your commentary, it is personable, efficient, and clear. This is great and efficient code as well.
+-I have never seen some of these themes and legend titles (element blank) and it's cool to know that they exist. I also like tally, and your use of geom bar
+-Maybe you could do colors or transparency in your graphs.
+-You can change the size of the physical graph, in addition to the scale.
