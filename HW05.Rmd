@@ -7,22 +7,81 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+library(gapminder)
+library(tidyverse)
+library(dplyr)
+library(forcats)
+library(ggplot2)
 ```
 
-## Including Plots
+Gapminder continent shows "character" which is functionally similar to class. 
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+Explore the effects of re-leveling a factor in a tibble by:
+
+comparing the results of arrange on the original and re-leveled factor.
+Plotting a figure of before/after re-leveling the factor (make sure to assign the factor to an aesthetic of your choosing).
+*These explorations should involve the data, the factor levels, and at least two figures (before and after*.
+
+Elaboration for the gapminder data set
+Drop Oceania. Filter the Gapminder data to remove observations associated with the continent of Oceania. Additionally, remove unused factor levels. Provide concrete information on the data before and after removing these rows and Oceania; address the number of rows and the levels of the affected factors.
+
+Reorder the levels of country or continent. Use the forcats package to change the order of the factor levels, based on summarized information of one of the quantitative variables. Consider experimenting with a summary statistic beyond the most basic choice of the mean/median. Use the forcats package in the tidyverse for this, rather than the baseR function as.factor.
+ 
+
+Class shows that continent is a factor; string shows even more detail, stating that continent is a factor with five levels. I have filtered to remove Oceania. At first I just named the Continents that I did want,using :
+
+no_oceania_gap <- c("Africa", "Americas", "Asia", "Europe")
+no_oceania_gap <- gapminder %>%
+  filter(continent %in% no_oceania_gap)
+nlevels(no_oceania_gap$continent)
+
+but then I thought it was a better idea to say that we want every continent except Oceania, using !=. Using nlevels, I can see that there are still five factors in the data set,desptite filtering out Oceania. I wanted to remove the factors, so I used drop(levels). Upon looking at the levels again, using nlevels, I can see that there are only four; one for each continent.  
+
+
+```{r}
+class(gapminder$continent)
+str(gapminder$continent)
+
+nlevels(gapminder$continent)
+no_oceania_gap <- gapminder %>%
+  filter(continent!= "Oceania")
+nlevels(no_oceania_gap$continent)
+
+dropped_oceania<- no_oceania_gap %>% 
+  droplevels()
+
+nlevels(dropped_oceania$continent)
+
+#best to use a bar graph before and after-need to fix this
+#calculate the average
+
+meanother<-no_oceania_gap%>%
+  group_by(continent) %>%
+  summarize(medianLifeExp = median(lifeExp))
+
+meanother
+
+
+no_oceania_gap%>%
+  group_by(continent) %>%
+  summarize(medianLifeExp = median(lifeExp))%>%
+  ggplot() +
+  geom_col(aes(continent,medianLifeExp)) +
+  coord_flip()+
+  theme_bw() +
+  ylab("Average Life Expectancy") + xlab("Continent")
+
+meanother %>%
+  ggplot() +
+  geom_col(aes(continent,medianLifeExp)) +
+  coord_flip()+
+  theme_bw() +
+  ylab("Average Life Expectancy") + xlab("Continent")
+
+no_ocenia_gap %>%
+
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
