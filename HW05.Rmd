@@ -13,6 +13,7 @@ library(tidyverse)
 library(dplyr)
 library(forcats)
 library(ggplot2)
+library(here)
 ```
 
 Gapminder continent shows "character" which is functionally similar to class. 
@@ -82,5 +83,19 @@ no_oceania_gap%>%
 Assignment 1
 ```{r}
 
+```
+
+
+
+Assignment 3
+```{r}
+CountryLife<-(gapminder %>% 
+  filter(year==2007) %>% 
+    group_by(country) %>%
+  summarize(medianLifeExp = median(lifeExp)) 
+  )
+
+
+read_csv(here("data", "HW05.Rmd"))
 ```
 
