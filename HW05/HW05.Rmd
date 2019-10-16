@@ -142,10 +142,7 @@ Assignment 5
 ```{r}
 ggsave(here("HW05", "PrePlotlyContinent.png"))
 
-![Alt text](/Users/SarahDada/Desktop/Gitgood/stat545-hw-sarahdada/HW05/PrePlotlyContinent.png)
-
-
-ggsave("PrePlotlyContinent.png", width = 20, height = 20, units = "cm")
+![image](files/Users/jzhang/Desktop/Gitgood/stat545-hw-sarahdada/HW05/PrePlotlyContinent.png)
 
 ```
 
