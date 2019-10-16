@@ -65,18 +65,22 @@ no_oceania_gap%>%
   theme_bw() +
   ylab("Median Life Expectancy") + xlab("Continent")
 
-#Reordered version of oceania-free gapminder 
+#Reordered version of oceania-free gapminder, based on the life expectancy. 
 
-experiment<-no_oceania_gap%>%
+no_oceania_gap%>%
   group_by(continent) %>%
-  summarize(medianLifeExp = median(lifeExp))
+  summarize(medianLifeExp = median(lifeExp))%>%
+  ggplot() +
+  geom_col(aes(fct_reorder(continent, medianLifeExp, min), y=medianLifeExp)) +
+  coord_flip()+
+  theme_bw() +
+  ylab("Median Life Expectancy") + xlab("Continent")
 
-fct_reorder(experiment$continent) %>%
- levels() %>% head
-
-#REORDER THIS- based on value
+```
 
 
+Assignment 1
+```{r}
 
 ```
 
