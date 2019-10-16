@@ -86,8 +86,7 @@ Assignment 1
 ```
 
 
-
-Assignment 3
+Assignment 3: I filtered to the gapminder data set in year 2007, and then grouped country. I summarized the median life expectancy of each country. I wrote the csv to my HW05 folder, and named it "CountryLifeExp.csv". When I read out the data, I read it out as "goodtime", because I thought it was a fun name.
 ```{r}
 CountryLife<-(gapminder %>% 
   filter(year==2007) %>% 
@@ -95,7 +94,15 @@ CountryLife<-(gapminder %>%
   summarize(medianLifeExp = median(lifeExp)) 
   )
 
+write_csv(CountryLife, here::here("HW05", "CountryLifeExp.csv"))
+          
+goodtime<-read_csv(here("HW05", "CountryLifeExp.csv"))
 
-read_csv(here("data", "HW05.Rmd"))
+goodtime
 ```
+Assignment 5
+```{r}
+
+```
+
 
