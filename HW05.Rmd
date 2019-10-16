@@ -15,23 +15,12 @@ library(forcats)
 library(ggplot2)
 library(here)
 ```
+Assignment 1:
 
-Gapminder continent shows "character" which is functionally similar to class. 
 
 
-Explore the effects of re-leveling a factor in a tibble by:
 
-comparing the results of arrange on the original and re-leveled factor.
-Plotting a figure of before/after re-leveling the factor (make sure to assign the factor to an aesthetic of your choosing).
-*These explorations should involve the data, the factor levels, and at least two figures (before and after*.
-
-Elaboration for the gapminder data set
-Drop Oceania. Filter the Gapminder data to remove observations associated with the continent of Oceania. Additionally, remove unused factor levels. Provide concrete information on the data before and after removing these rows and Oceania; address the number of rows and the levels of the affected factors.
-
-Reorder the levels of country or continent. Use the forcats package to change the order of the factor levels, based on summarized information of one of the quantitative variables. Consider experimenting with a summary statistic beyond the most basic choice of the mean/median. Use the forcats package in the tidyverse for this, rather than the baseR function as.factor.
- 
-
-Class shows that continent is a factor; string shows even more detail, stating that continent is a factor with five levels. I have filtered to remove Oceania. At first I just named the Continents that I did want,using :
+I have filtered to remove Oceania. At first I just named the Continents that I did want,using :
 
 no_oceania_gap <- c("Africa", "Americas", "Asia", "Europe")
 no_oceania_gap <- gapminder %>%
@@ -139,16 +128,19 @@ PrePlotlyContinent %>% ggplotly()
 
 Assignment 5
 
+ I named the path to Homework 5 "p" and saved my.png in the HW05 folder. I could also save changes through that folder as well. I changed the Height, width, and units in "PrePlotlyContinent2"
 ```{r}
+p<- here::here ("HW05")
+
 ggsave(here("HW05", "PrePlotlyContinent.png"))
-
-![Alt text](/Users/SarahDada/Desktop/Gitgood/stat545-hw-sarahdada/HW05/PrePlotlyContinent.png)
-
-
-ggsave("PrePlotlyContinent.png", width = 20, height = 20, units = "cm")
-
 ```
+![](PrePlotlyContinent.png)
+```{r}
+ggsave("PrePlotlyContinent2.png", path=p,  width = 70, height = 20, units = "cm")
+```
+![](PrePlotlyContinent2.png)
+```{r}
+ggsave("PrePlotlyContinentDPI.png", path=p,dpi=300)
 
-
-
-
+#I changed the raster graphics using DPI. I needed to use path=p, otherwise it does not know where to save to.
+```
