@@ -14,21 +14,21 @@ library(dplyr)
 library(forcats)
 library(ggplot2)
 library(here)
+library(plotly)
 ```
 Assignment 1:
 
+The here package seems to do two things that are exceptional: It can be used among different operating systems without difficulty, and it can detect the root directory.
 
+It allows other people to run your code. It works with mac and windows, so it is platform independent. Another user doesn’t have to set up the code so that the data has an absolute path in *their* directory; it knows where the file is based on the R project. Additionally, if you set up the files outside of the R studio project, they still run. It knows where the file is, again based on the R project.
 
+Unlike setwd, here can direct to a root directory, which means that it knows where the file is stored. It also will write directly to a file, regardless of that path. This means that if a path is changed to the file, it should still be able to find the directory. It is not an absolute path. As well, others can run the code on their computer, instead of being dependent on your local path. Also, managing subdirectories is easier, because you aren’t setting an absolute path. It knows the directory based on the R project file.
 
-I have filtered to remove Oceania. At first I just named the Continents that I did want,using :
+Assignment 2:
 
-no_oceania_gap <- c("Africa", "Americas", "Asia", "Europe")
-no_oceania_gap <- gapminder %>%
-  filter(continent %in% no_oceania_gap)
-nlevels(no_oceania_gap$continent)
+I used class to determine it was a factor, and string to determine that it was a factor with five variables.
 
-but then I thought it was a better idea to say that we want every continent except Oceania, using !=. Using nlevels, I can see that there are still five factors in the data set,desptite filtering out Oceania. I wanted to remove the factors, so I used drop(levels). Upon looking at the levels again, using nlevels, I can see that there are only four; one for each continent.  
-
+I have filtered to remove Oceania using != , rather than just naming all of my continents of interest. Using nlevels, I can see that there are still five factors in the data set, despite filtering out Oceania. I wanted to remove the factors, so I used drop(levels). Upon looking at the levels again, using nlevels, I can see that there are only four; one for each continent.  
 
 ```{r}
 class(gapminder$continent)
@@ -55,7 +55,7 @@ no_oceania_gap%>%
   theme_bw() +
   ylab("Median Life Expectancy") + xlab("Continent")
 
-#Reordered version of oceania-free gapminder, based on the life expectancy. 
+#Reordered version of oceania-free gapminder, based on the life expectancy in years, from highest to lowest. 
 
 no_oceania_gap%>%
   group_by(continent) %>%
@@ -67,13 +67,6 @@ no_oceania_gap%>%
   ylab("Median Life Expectancy") + xlab("Continent")
 
 ```
-
-
-Assignment 1
-```{r}
-
-```
-
 
 Assignment 3: I filtered to the gapminder data set in year 2007, and then grouped country. I summarized the median life expectancy of each country. I wrote the csv to my HW05 folder, and named it "CountryLifeExp.csv". When I read out the data, I read it out as "goodtime", because I thought it was a fun name.
 ```{r}
@@ -89,9 +82,10 @@ goodtime<-read_csv(here("HW05", "CountryLifeExp.csv"))
 
 goodtime
 ```
-Assignment 4:  My previous work showed the number of countries per continent in year 2007, in black and white.
+
+Assignment 4:  My previous work showed the number of countries per continent in year 2007, in black and white. My title and subtitle were not showing.
 ```{r}
-previous
+
 Continentcount<-(gapminder %>% 
 filter(year==2007) %>%
 count(continent)) 
@@ -101,13 +95,11 @@ Continentcount %>%
     geom_bar(stat = "identity") +
     labs(x = "Continent",y = "Number of Countries")
       title = "Number of countries in each Continent"
-      subtitle = "(based on 2007 gapminder data)
+      subtitle = "(based on 2007 gapminder data)"
 
 ```
-
+New graph: I changed the bar graph so that each bar has a different colour to make it distinct. I removed the distracting grey background but kept the lines, so that you could still determine the number of countries, but it is more clear and clean. It was suggested in class to entirely remove the lines, but then you could not determine the number of countries. This was an in-between. I removed the x axis because it was redundant (those are evidently continents), but decided to keep the y axis, and put in a better title which properly explained the x and y axis. This makes the plot cleaner. The subtitle tells us where the data came from, however the subtitle dissappears when I add the "plotly"" interactive component. I used "plotly"" to make it interactive, so you can see data about how many countries are in a continent (denoted "n" when hovering) by hovering over the bar. I made this a seperate graph, so that one graph has the subtitle and is not interactive, and the other is an html widget. 
 ```{r}
-#Now: I changed the bar graph so that each bar has a different colour to make it distinct. I removed the distracting grey background but kept the lines, so that you could still determine the number of countries, but it is more clear and clean. It was suggested in class to entirely remove the lines, but then you could not determine the number of countries. This was an in-between. I removed the x axis because it was redundant (those are evidently continents), but decided to keep the y axis, and put in a better title which properly explained the x and y axis. This makes the plot cleaner. The subtitle tells us where the data came from, however the subtitle dissappears when I add the plotly interactive component. I used plotly to make it interactive, so you can see data about how many countries are in a continent (denoted "n" when hovering) by hovering over the bar. I made this a seperate graph, so that one graph has the subtitle and is not interactive, and the other is an html widget. 
-  
 Continentcount<-(gapminder %>% 
 filter(year==2007) %>%
 count(continent)) 
@@ -123,24 +115,40 @@ labs(x="",
 PrePlotlyContinent
 
 PrePlotlyContinent %>% ggplotly()
-
 ```
 
 Assignment 5
 
  I named the path to Homework 5 "p" and saved my.png in the HW05 folder. I could also save changes through that folder as well. I changed the Height, width, and units in "PrePlotlyContinent2"
 ```{r}
-p<- here::here ("HW05")
+p<- here::here("HW05")
 
 ggsave(here("HW05", "PrePlotlyContinent.png"))
 ```
 ![](PrePlotlyContinent.png)
 ```{r}
-ggsave("PrePlotlyContinent2.png", path=p,  width = 70, height = 20, units = "cm")
+ggsave("PrePlotlyContinent2.png", path=p,  width = 9, height = 9, units="in")
+
+#I made the plot larger 
 ```
 ![](PrePlotlyContinent2.png)
 ```{r}
-ggsave("PrePlotlyContinentDPI.png", path=p,dpi=300)
+ggsave("PrePlotlyContinentSmall.png", path=p, width = 4, height = 4, units="in")
 
-#I changed the raster graphics using DPI. I needed to use path=p, otherwise it does not know where to save to.
+#I made the plot smaller
 ```
+![](HW05/PrePlotlyContinentSmall.png)
+
+```{r}
+ggsave("DPIsmall.png", path=p , width = 4, height = 4, units="in", dpi=100)
+
+#I reduced the raster graphics using DPI. I needed to use path=p, otherwise it does not know where to save to.
+```
+![](HW05/DPIsmall.png)
+
+```{r}
+ggsave("high.png", width = 4, height = 4, units="in", dpi=400)
+
+#The higher DPI had better resolution.
+```
+![](high.png)
