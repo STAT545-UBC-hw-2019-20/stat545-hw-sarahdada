@@ -137,17 +137,17 @@ ggsave("PrePlotlyContinentSmall.png", path=p, width = 4, height = 4, units="in")
 
 #I made the plot smaller
 ```
-![](HW05/PrePlotlyContinentSmall.png)
+![](PrePlotlyContinentSmall.png)
 
 ```{r}
 ggsave("DPIsmall.png", path=p , width = 4, height = 4, units="in", dpi=100)
 
 #I reduced the raster graphics using DPI. I needed to use path=p, otherwise it does not know where to save to.
 ```
-![](HW05/DPIsmall.png)
+![](DPIsmall.png)
 
 ```{r}
-ggsave("high.png", width = 4, height = 4, units="in", dpi=400)
+ggsave("high.png", path=p, width = 4, height = 4, units="in", dpi=400)
 
 #The higher DPI had better resolution.
 ```
