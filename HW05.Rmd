@@ -54,15 +54,7 @@ dropped_oceania<- no_oceania_gap %>%
 
 nlevels(dropped_oceania$continent)
 
-#best to use a bar graph before and after-need to fix this
-#calculate the average
-
-meanother<-no_oceania_gap%>%
-  group_by(continent) %>%
-  summarize(medianLifeExp = median(lifeExp))
-
-meanother
-
+#The Median life Expectancy of all continents except Oceania, before releveling.
 
 no_oceania_gap%>%
   group_by(continent) %>%
@@ -71,16 +63,19 @@ no_oceania_gap%>%
   geom_col(aes(continent,medianLifeExp)) +
   coord_flip()+
   theme_bw() +
-  ylab("Average Life Expectancy") + xlab("Continent")
+  ylab("Median Life Expectancy") + xlab("Continent")
 
-meanother %>%
-  ggplot() +
-  geom_col(aes(continent,medianLifeExp)) +
-  coord_flip()+
-  theme_bw() +
-  ylab("Average Life Expectancy") + xlab("Continent")
+#Reordered version of oceania-free gapminder 
 
-no_ocenia_gap %>%
+experiment<-no_oceania_gap%>%
+  group_by(continent) %>%
+  summarize(medianLifeExp = median(lifeExp))
+
+fct_reorder(experiment$continent) %>%
+ levels() %>% head
+
+#REORDER THIS- based on value
+
 
 
 ```
